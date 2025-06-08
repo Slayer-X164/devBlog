@@ -29,7 +29,7 @@ const Header = () => {
         <div>
           <button className="cursor-pointer flex justify-center items-center gap-2 bg-indigo-600 rounded-lg py-2 px-4 text-md">
             <PiSignIn />
-           <Link>Sign in</Link>
+           <Link to='/sign-in'>Sign in</Link>
           </button>
         </div>
       </div>

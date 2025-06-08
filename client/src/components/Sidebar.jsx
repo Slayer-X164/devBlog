@@ -17,7 +17,7 @@ const Sidebar = () => {
   ];
   const categoryLinks = [
     {label: 'Javascript', path: '/', icon:<GoDotFill /> },
-    {label: 'python', path: '/', icon:<GoDotFill /> },
+    {label: 'Python', path: '/', icon:<GoDotFill /> },
   ]
   return (
     <div className="h-[calc(100vh-72px)] w-96 bg-slate-950 text-white pr-8 py-8 flex gap-6 flex-col">
