@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { z } from "zod";
+import { useNavigate } from "react-router-dom";
+import { showToast } from "@/features/showToast";
 const Signup = () => {
+  const navigate = useNavigate();
   //zod schema
   const formSchema = z
     .object({
@@ -25,7 +28,28 @@ const Signup = () => {
     name: "",
     confirmPassword: "",
   });
-
+  const signUpApiFunction = async (result) => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/auth/sign-up`,
+        {
+          method: "POST",
+          headers: { "Content-type": "application/json" },
+          credentials:'include',
+          body: JSON.stringify(result),
+        }
+      );
+      const data = await response.json();
+      if (!response.ok) {
+        showToast("error", data.message);
+      } else {
+        navigate("/sign-in");
+        showToast("success", data.message);
+      }
+    } catch (error) {
+      showToast("error", error.message);
+    }
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("worked");
@@ -37,7 +61,7 @@ const Signup = () => {
       confirmPassword,
     });
     if (result.success) {
-      console.log("valid!", result.data);
+      signUpApiFunction(result.data);
       setError({ email: "", password: "", name: "", confirmPassword: "" });
     } else {
       const fieldErrors = result.error.flatten().fieldErrors;
@@ -53,7 +77,7 @@ const Signup = () => {
     <div className="text-neutral-200 h-screen w-full flex items-center justify-center p-3">
       <div className="drop-shadow-2xl drop-shadow-blue-600/12 w-96 h-auto py-6 px-4 rounded-lg bg-slate-900 flex flex-col ">
         <div>
-          <h1 className="text-2xl text-center mb-6 text-slate-300 font-semibold">
+          <h1 className="text-2xl text-center mb-6 text-slate-500 font-semibold">
             Create Your Account
           </h1>
         </div>

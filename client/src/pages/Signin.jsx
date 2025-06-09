@@ -1,7 +1,9 @@
+import { showToast } from "@/features/showToast";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
 const Signin = () => {
+  const navigate = useNavigate();
   //zod schema
   const formSchema = z.object({
     email: z.string().email("enter valid email"),
@@ -12,14 +14,35 @@ const Signin = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState({ email: "", password: "" });
 
+  const signInApiFunction = async (result) => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/auth/sign-in`,
+        {
+          method: "POST",
+          headers: { "Content-type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify(result),
+        }
+      );
+      const data = await response.json();
+      if (!response.ok) {
+        showToast("error", `error: ${data.message}`);
+      } else {
+        navigate("/");
+        showToast("success", data.message);
+      }
+    } catch (error) {}
+  };
+
   const handleSubmit = (e) => {
+    console.log("worked signin");
+
     e.preventDefault();
     const result = formSchema.safeParse({ email, password });
     if (result.success) {
-      console.log("valid!", result.data);
+      signInApiFunction(result.data);
       setError({ email: "", password: "" });
-      //signed in user stored
-      // dispatch(signinUser(result.data));
     } else {
       const fieldErrors = result.error.flatten().fieldErrors;
       setError({
