@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { z } from "zod";
 import { useNavigate } from "react-router-dom";
 import { showToast } from "@/features/showToast";
+import GoogleAuth from "@/components/GoogleAuth";
 const Signup = () => {
   const navigate = useNavigate();
   //zod schema
@@ -76,12 +77,13 @@ const Signup = () => {
   return (
     <div className="text-neutral-200 h-screen w-full flex items-center justify-center p-3">
       <div className="drop-shadow-2xl drop-shadow-blue-600/12 w-96 h-auto py-6 px-4 rounded-lg bg-slate-900 flex flex-col ">
+
         <div>
           <h1 className="text-2xl text-center mb-6 text-slate-500 font-semibold">
             Create Your Account
           </h1>
         </div>
-
+         {/* <GoogleAuth/> */}
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block text-slate-400 mb-1">Name</label>

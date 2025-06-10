@@ -1,3 +1,4 @@
+import GoogleAuth from "@/components/GoogleAuth";
 import { showToast } from "@/features/showToast";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -59,15 +60,7 @@ const Signin = () => {
             Login Into Account
           </h1>
         </div>
-        <button className="flex text-slate-300 items-center justify-center w-full border border-slate-400 py-2 px-4 rounded-md mb-4 hover:bg-slate-800 cursor-pointer transition">
-          <img
-            src="https://www.svgrepo.com/show/355037/google.svg"
-            alt="Google"
-            className="h-5 w-5 mr-2"
-          />
-          Continue With Google
-        </button>
-
+        <GoogleAuth  />
         <div className="flex items-center mb-4">
           <hr className="flex-grow border-slate-500" />
           <span className="mx-2 text-slate-500">OR</span>
