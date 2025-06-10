@@ -55,7 +55,7 @@ export const signInUser = async (req, res, next) => {
     });
     res.status(200).json({
       success: true,
-      user,
+      user:user,
       message: "Login Successful!",
     });
   } catch (error) {
@@ -65,7 +65,7 @@ export const signInUser = async (req, res, next) => {
 
 export const signInWithGoogle = async (req, res, next) => {
   console.log("google sign in controler");
-  
+
   const { name, email, photoURL } = req.body;
   let user;
   try {
@@ -81,12 +81,14 @@ export const signInWithGoogle = async (req, res, next) => {
       });
       user = await createNewUser.save();
     }
+    const newUser = user.toObject({ getters: true });
+    delete newUser.password;
     const token = jwt.sign(
       {
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-        photoURL: user.photoURL,
+        _id: newUser._id,
+        name: newUser.name,
+        email: newUser.email,
+        photoURL: newUser.photoURL,
       },
       process.env.JWT_SECRET
     );
@@ -96,15 +98,29 @@ export const signInWithGoogle = async (req, res, next) => {
       sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
       path: "/",
     });
-    const newUser = user.toObject({ getters: true });
-    delete newUser.password;
-
     res.status(200).json({
       success: true,
-      newUser,
+      user:newUser,
       message: "Login Successful!",
     });
   } catch (error) {
+    next(errorHandler(500, error.message));
+  }
+};
+export const signOutUser = async (req, res, next) => {
+  try {
+    res.clearCookie("access_token", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
+      path: "/",
+    });
+    res.status(200).json({
+      success: true,
+      message: "sign out successful",
+    });
+  } catch (error) {
+    console.log("error in signing out");
     next(errorHandler(500, error.message));
   }
 };

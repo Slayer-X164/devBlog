@@ -1,14 +1,17 @@
 import { auth, provider } from "@/features/auth/fireBase";
 import { showToast } from "@/features/showToast";
+import { setUser } from "@/redux/user/user.slice";
 import { signInWithPopup } from "firebase/auth";
 import React from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const GoogleAuth = () => {
+  
+
+  const dispatch = useDispatch()
   const navigate = useNavigate();
   const handleGoogleAuth = async () => {
-    console.log("clicked");
-
     const googleResponse = await signInWithPopup(auth, provider);
     const userData = {
       name: googleResponse.user.displayName,
@@ -29,9 +32,10 @@ const GoogleAuth = () => {
       if (!response.ok) {
         showToast("error", data.message);
       } else {
+        dispatch(setUser(data))
         navigate("/");
         showToast("success", data.message);
-        console.log(user);
+
       }
     } catch (error) {
       showToast("error", console.error.message);

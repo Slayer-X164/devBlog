@@ -1,9 +1,12 @@
 import GoogleAuth from "@/components/GoogleAuth";
 import { showToast } from "@/features/showToast";
+import { setUser } from "@/redux/user/user.slice";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
 const Signin = () => {
+  const dispatch = useDispatch()
   const navigate = useNavigate();
   //zod schema
   const formSchema = z.object({
@@ -16,6 +19,7 @@ const Signin = () => {
   const [error, setError] = useState({ email: "", password: "" });
 
   const signInApiFunction = async (result) => {
+
     try {
       const response = await fetch(
         `${import.meta.env.VITE_API_BASE_URL}/auth/sign-in`,
@@ -30,6 +34,7 @@ const Signin = () => {
       if (!response.ok) {
         showToast("error", `error: ${data.message}`);
       } else {
+        dispatch(setUser(data.user))
         navigate("/");
         showToast("success", data.message);
       }
