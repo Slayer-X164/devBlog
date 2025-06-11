@@ -1,4 +1,4 @@
-import { errorHandler } from "../middlewares/errorHandler.middleware.js";
+import  errorHandler  from "../middlewares/errorHandler.middleware.js";
 import userModel from "../models/user.model.js";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";

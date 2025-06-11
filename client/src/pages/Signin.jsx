@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
 const Signin = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   //zod schema
   const formSchema = z.object({
@@ -19,7 +19,6 @@ const Signin = () => {
   const [error, setError] = useState({ email: "", password: "" });
 
   const signInApiFunction = async (result) => {
-
     try {
       const response = await fetch(
         `${import.meta.env.VITE_API_BASE_URL}/auth/sign-in`,
@@ -31,12 +30,11 @@ const Signin = () => {
         }
       );
       const data = await response.json();
-      console.log(data.user);
-      
+
       if (!response.ok) {
         showToast("error", `error: ${data.message}`);
       } else {
-        dispatch(setUser(data.user))
+        dispatch(setUser(data.user));
         navigate("/");
         showToast("success", data.message);
       }
@@ -67,7 +65,7 @@ const Signin = () => {
             Login Into Account
           </h1>
         </div>
-        <GoogleAuth  />
+        <GoogleAuth />
         <div className="flex items-center mb-4">
           <hr className="flex-grow border-slate-500" />
           <span className="mx-2 text-slate-500">OR</span>

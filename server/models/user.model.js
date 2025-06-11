@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     trim: true,
   },
-  profilePhoto: {
+  photoURL: {
     type: String,
     trim: true,
   },

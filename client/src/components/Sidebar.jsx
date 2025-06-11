@@ -9,7 +9,7 @@ import { MdOutlineCategory } from "react-icons/md";
 import { Link } from 'react-router-dom';
 const Sidebar = () => {
      const sidebarLinks = [
-    { label: 'Home', path: '/home' , icon: <FaHome />},
+    { label: 'Home', path: '/' , icon: <FaHome />},
     { label: 'Categories', path: '/categories', icon: <BiCategory />}  ,
     { label: 'Blogs', path: '/blogs', icon: <IoDocumentTextOutline />} ,
     { label: 'Comments', path: '/comments', icon: <FaRegComment />} ,

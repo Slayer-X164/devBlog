@@ -34,7 +34,6 @@ const Header = () => {
 
       const data = await response.json();
 
-      console.log("clicked", data);
       if (!response.ok) {
         showToast("error", data.message);
       } else {
@@ -62,18 +61,20 @@ const Header = () => {
           />
         </div>
         <div>
+          <Link to='/'>
           <button className="cursor-pointer flex justify-center items-center gap-2 bg-blue-600 rounded-lg py-2 px-4 text-md">
             <FaPencilAlt />
-            <Link>Write Post</Link>
+            Write Post
           </button>
+          </Link>
         </div>
       </div>
       {!user.isSignedIn ? (
         <div>
-          <button className="cursor-pointer flex justify-center items-center gap-2 bg-indigo-600 rounded-lg py-2 px-4 text-md">
+          <Link to="/sign-in" className="cursor-pointer flex justify-center items-center gap-2 bg-indigo-600 rounded-lg py-2 px-4 text-md">
             <PiSignIn />
-            <Link to="/sign-in">Sign in</Link>
-          </button>
+            Sign in
+          </Link>
         </div>
       ) : (
         <div
@@ -84,7 +85,7 @@ const Header = () => {
             <img
               src={user.user.photoURL || "user.png"}
               alt="userPhoto"
-              className="w-6"
+              className="w-6 rounded-full"
             />
             <h3 className="text-sm truncate max-w-22">{user.user.name}</h3>
             <div>{dropdownIsOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}</div>
