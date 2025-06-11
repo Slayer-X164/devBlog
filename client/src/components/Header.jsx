@@ -82,11 +82,11 @@ const Header = () => {
         >
           <div className="p-2  rounded-md flex items-center gap-2 bg-slate-950">
             <img
-              src={user.user.user.profilePhoto || "user.png"}
+              src={user.user.photoURL || "user.png"}
               alt="userPhoto"
               className="w-6"
             />
-            <h3 className="text-sm truncate max-w-22">{user.user.user.name}</h3>
+            <h3 className="text-sm truncate max-w-22">{user.user.name}</h3>
             <div>{dropdownIsOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}</div>
           </div>
           {dropdownIsOpen && (
@@ -94,10 +94,10 @@ const Header = () => {
               <div className="min-w-60 py-2 px-4  bg-slate-950  rounded-lg flex justify-center flex-col">
                 <div className="w-full flex items-start flex-col p-1.5 border-b pb-2 border-slate-700">
                   <h2 className="text-lg text-slate-300 font-semibold">
-                    {user.user.user.name}
+                    {user.user.name}
                   </h2>
                   <h2 className="text-sm text-slate-400 pb-2">
-                    {user.user.user.email}
+                    {user.user.email}
                   </h2>
                 </div>
                 <div className="w-full flex items-start flex-col p-1.5 border-b pb-2 border-slate-700 gap-2">

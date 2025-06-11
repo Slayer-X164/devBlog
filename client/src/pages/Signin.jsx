@@ -31,6 +31,8 @@ const Signin = () => {
         }
       );
       const data = await response.json();
+      console.log(data.user);
+      
       if (!response.ok) {
         showToast("error", `error: ${data.message}`);
       } else {

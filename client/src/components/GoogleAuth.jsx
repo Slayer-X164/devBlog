@@ -7,12 +7,14 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const GoogleAuth = () => {
-  
+
 
   const dispatch = useDispatch()
   const navigate = useNavigate();
   const handleGoogleAuth = async () => {
     const googleResponse = await signInWithPopup(auth, provider);
+    console.log(googleResponse.user.photoURL);
+
     const userData = {
       name: googleResponse.user.displayName,
       email: googleResponse.user.email,
@@ -29,10 +31,12 @@ const GoogleAuth = () => {
         }
       );
       const data = await response.json();
+      console.log(data.user);
+
       if (!response.ok) {
         showToast("error", data.message);
       } else {
-        dispatch(setUser(data))
+        dispatch(setUser(data.user))
         navigate("/");
         showToast("success", data.message);
 
