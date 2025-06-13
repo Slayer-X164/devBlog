@@ -1,6 +1,6 @@
 import Loading from "@/components/Loading";
 import { useFetch } from "@/hooks/useFetch";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { z } from "zod";
 const Profile = () => {
@@ -12,17 +12,20 @@ const Profile = () => {
   }`;
 
   const {
-    data:userData,
+    data: userData,
     loading,
-    error:userError,
+    error: userError,
   } = useFetch(API_URL, {
     method: "GET",
     credentials: "include",
   });
 
-
-
-
+  useEffect(() => {
+    if (userData && userData.success) {
+      setName(userData.user.name);
+      setEmail(userData.user.email);
+    }
+  }, [userData]);
 
   const formSchema = z.object({
     name: z.string().min(3, "name should be atleast 3 characters long"),
@@ -50,14 +53,17 @@ const Profile = () => {
   return (
     <div className="relative w-full h-[calc(100vh-72px)] bg-slate-950 text-neutral-300 flex justify-center p-4">
       <div>
-{loading&&<Loading/>}
+        {loading && <Loading />}
         <form
           onSubmit={handleSave}
           className="relative w-xl rounded-xl border-1 mt-4 p-6 flex  flex-col h-auto items-center   border-slate-700 gap-3"
         >
-
           <div className="from-indigo-200 via-indigo-500 to-indigo-950 bg-gradient-to-br rounded-full p-1">
-            <img src="user.png" alt="user photo" className="w-34" />
+            <img
+              src={userData?.name?.photoURL || "user.png"}
+              alt="user photo"
+              className="w-34"
+            />
           </div>
           <div className="flex flex-col gap-1 w-full text-md text-slate-400">
             <label className="text-lg">Name</label>

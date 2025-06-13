@@ -11,15 +11,11 @@ const GoogleAuth = () => {
   const navigate = useNavigate();
   const handleGoogleAuth = async () => {
     const googleResponse = await signInWithPopup(auth, provider);
-    console.log(googleResponse.user.photoURL);
-
     const userData = {
       name: googleResponse.user.displayName,
       email: googleResponse.user.email,
       photoURL: googleResponse.user.photoURL,
     };
-    
-
     try {
       const response = await fetch(
         `${import.meta.env.VITE_API_BASE_URL}/auth/google/sign-in`,
@@ -32,10 +28,13 @@ const GoogleAuth = () => {
       );
       const data = await response.json();
 
+      //update userData to store mongodb_id
+      const updatedUserData = { ...userData, _id: data.user.id };
+
       if (!response.ok) {
         showToast("error", data.message);
       } else {
-        dispatch(setUser(userData));
+        dispatch(setUser(updatedUserData));
         navigate("/");
         showToast("success", data.message);
       }

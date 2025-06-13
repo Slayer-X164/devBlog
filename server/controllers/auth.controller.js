@@ -28,9 +28,12 @@ export const signInUser = async (req, res, next) => {
   const { email, password } = req.body;
   try {
     const checkUserInDB = await userModel.findOne({ email });
+
     if (!checkUserInDB) {
       next(errorHandler(409, "Account doesn't exists!!"));
     }
+
+
     const hashedPassword = checkUserInDB.password;
     const comparePassword = bcryptjs.compare(password, hashedPassword);
     if (!comparePassword) {
@@ -83,6 +86,7 @@ export const signInWithGoogle = async (req, res, next) => {
     }
     const newUser = user.toObject({ getters: true });
     delete newUser.password;
+   
     const token = jwt.sign(
       {
         _id: newUser._id,
@@ -98,6 +102,8 @@ export const signInWithGoogle = async (req, res, next) => {
       sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
       path: "/",
     });
+
+
     res.status(200).json({
       success: true,
       user:newUser,

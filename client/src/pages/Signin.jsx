@@ -30,8 +30,10 @@ const Signin = () => {
         }
       );
       const data = await response.json();
+      
 
       if (!response.ok) {
+        console.log("error");
         showToast("error", `error: ${data.message}`);
       } else {
         dispatch(setUser(data.user));

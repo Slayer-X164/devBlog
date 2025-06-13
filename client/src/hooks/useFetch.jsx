@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
 export const useFetch = (API_URL, options = {}, dependencies = []) => {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState();
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState();
 
   useEffect(() => {
     setLoading(true);
@@ -13,8 +13,10 @@ export const useFetch = (API_URL, options = {}, dependencies = []) => {
         const responseData = await response.json();
         if (!response.ok) {
           console.log(response.statusText,response.status);
-          
+
         }
+        console.log(responseData);
+        
         setData(responseData);
         setError(null);
       } catch (error) {

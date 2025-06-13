@@ -33,6 +33,7 @@ const Header = () => {
       );
 
       const data = await response.json();
+      // console.log(user.user.photoURL);
 
       if (!response.ok) {
         showToast("error", data.message);
@@ -83,8 +84,8 @@ const Header = () => {
         >
           <div className="p-2  rounded-md flex items-center gap-2 bg-slate-950">
             <img
-              src={user.user.photoURL || "user.png"}
-              alt="userPhoto"
+              src={"user.png"}
+              alt=""
               className="w-6 rounded-full"
             />
             <h3 className="text-sm truncate max-w-22">{user.user.name}</h3>
