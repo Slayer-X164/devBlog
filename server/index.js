@@ -27,6 +27,7 @@ app.use('/api',userRoute)
 app.listen(port,()=>{
     console.log("server is running on port", port);
 })
+
 //error handle middleware
 app.use((err,req,res,next)=>{
     const statusCode = err.statusCode || 500

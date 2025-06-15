@@ -84,7 +84,7 @@ const Header = () => {
         >
           <div className="p-2  rounded-md flex items-center gap-2 bg-slate-950">
             <img
-              src={"user.png"}
+              src={user.user.photoURL || "user.png"}
               alt=""
               className="w-6 rounded-full"
             />
