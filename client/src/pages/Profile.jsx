@@ -13,6 +13,7 @@ const Profile = () => {
   const [file, setFile] = useState();
   const [preview, setPreview] = useState();
   const [imageSource, setImageSource] = useState();
+  const [saveLoad,setSaveLoad] = useState(false)
   //fetchData hook
   const API_URL = `${import.meta.env.VITE_API_BASE_URL}/user/get-user/${
     user.user._id
@@ -36,6 +37,7 @@ const Profile = () => {
   }, [userData]);
 
   const updateDataApiFunction = async (result) => {
+    setSaveLoad(true)
     try {
       const formData = new FormData();
       formData.append("File", file);
@@ -54,8 +56,8 @@ const Profile = () => {
       const responseData = await response.json();
       dispatch(setUser(responseData.user));
       showToast("success", responseData.message);
-
       setImageSource(responseData.user.photoURL);
+      setSaveLoad(false)
     } catch (error) {
       showToast("error", error.message);
     }
@@ -95,7 +97,8 @@ const Profile = () => {
   return (
     <div className="relative w-full h-[calc(100vh-72px)] bg-slate-950 text-neutral-300 flex justify-center p-4">
       <div>
-        {loading && <Loading />}
+        {loading || saveLoad && <Loading />}
+
         <form
           onSubmit={handleSave}
           className="relative w-xl rounded-xl border-1 mt-4 p-6 flex  flex-col h-auto items-center   border-slate-700 gap-3"

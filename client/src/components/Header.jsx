@@ -92,7 +92,7 @@ const Header = () => {
             <div>{dropdownIsOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}</div>
           </div>
           {dropdownIsOpen && (
-            <div className="p-[1px] absolute top-14 -left-20 rounded-lg bg-gradient-to-br from-indigo-200 via-indigo-500 to-indigo-950 cursor-default">
+            <div className="p-[1px] z-10 absolute top-14 -left-20 rounded-lg bg-gradient-to-br from-indigo-200 via-indigo-500 to-indigo-950 cursor-default">
               <div className="min-w-60 py-2 px-4  bg-slate-950  rounded-lg flex justify-center flex-col">
                 <div className="w-full flex items-start flex-col p-1.5 border-b pb-2 border-slate-700">
                   <h2 className="text-lg text-slate-300 font-semibold">
