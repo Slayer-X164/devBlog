@@ -53,7 +53,7 @@ const Header = () => {
         <h1 className="text-2xl font-semibold font-mono">DevBlog</h1>
       </div>
       <div className="flex items-center gap-6">
-        <div className="flex items-center justify gap-2 p-2 rounded-md border border-slate-700  bg-slate-900 text-neutral-500">
+        <div className="flex items-center justify gap-2 p-2 rounded-lg border border-slate-700  bg-slate-900/50 text-neutral-500">
           <IoIosSearch />
           <input
             type="text"

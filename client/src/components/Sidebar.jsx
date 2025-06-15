@@ -7,10 +7,11 @@ import { FaRegUser } from "react-icons/fa";
 import { GoDotFill } from "react-icons/go";
 import { MdOutlineCategory } from "react-icons/md";
 import { Link } from 'react-router-dom';
+import { categoriesRoute } from '@/pages/pageRoutes';
 const Sidebar = () => {
      const sidebarLinks = [
     { label: 'Home', path: '/' , icon: <FaHome />},
-    { label: 'Categories', path: '/categories', icon: <BiCategory />}  ,
+    { label: 'Categories', path: categoriesRoute, icon: <BiCategory />}  ,
     { label: 'Blogs', path: '/blogs', icon: <IoDocumentTextOutline />} ,
     { label: 'Comments', path: '/comments', icon: <FaRegComment />} ,
     { label: 'Users', path: '/users', icon: <FaRegUser />} ,
@@ -18,6 +19,10 @@ const Sidebar = () => {
   const categoryLinks = [
     {label: 'Javascript', path: '/', icon:<GoDotFill /> },
     {label: 'Python', path: '/', icon:<GoDotFill /> },
+    {label: 'React', path: '/', icon:<GoDotFill /> },
+    {label: 'Frontend', path: '/', icon:<GoDotFill /> },
+    {label: 'Fullstack', path: '/', icon:<GoDotFill /> },
+    {label: 'UI/UX', path: '/', icon:<GoDotFill /> },
   ]
   return (
     <div className="h-[calc(100vh-72px)] w-96 bg-slate-950 text-white pr-8 py-8 flex gap-6 flex-col">

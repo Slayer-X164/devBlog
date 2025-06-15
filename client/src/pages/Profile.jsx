@@ -65,7 +65,7 @@ const Profile = () => {
   const formSchema = z.object({
     name: z.string().min(3, "name should be atleast 3 characters long"),
     email: z.string().email("enter valid email"),
-    bio: z.string().max(300, "should be less than 300 characters"),
+    bio: z.string().max(300, "should be less than 300 characters").optional(),
   });
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");

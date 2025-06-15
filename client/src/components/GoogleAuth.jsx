@@ -14,7 +14,6 @@ const GoogleAuth = () => {
     const userData = {
       name: googleResponse.user.displayName,
       email: googleResponse.user.email,
-      photoURL: googleResponse.user.photoURL,
     };
     try {
       const response = await fetch(
@@ -29,7 +28,11 @@ const GoogleAuth = () => {
       const data = await response.json();
 
       //update userData to store mongodb_id
-      const updatedUserData = { ...userData, _id: data.user.id };
+      const updatedUserData = {
+        ...userData,
+        _id: data.user.id,
+        photoURL: data.user.photoURL,
+      };
 
       if (!response.ok) {
         showToast("error", data.message);
