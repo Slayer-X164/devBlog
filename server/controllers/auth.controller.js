@@ -86,7 +86,7 @@ export const signInWithGoogle = async (req, res, next) => {
     }
     const newUser = user.toObject({ getters: true });
     delete newUser.password;
-   
+
     const token = jwt.sign(
       {
         _id: newUser._id,
@@ -107,7 +107,7 @@ export const signInWithGoogle = async (req, res, next) => {
     res.status(200).json({
       success: true,
       user:newUser,
-      message: "Login Successful!",
+      message: "Sign in Successful!",
     });
   } catch (error) {
     next(errorHandler(500, error.message));

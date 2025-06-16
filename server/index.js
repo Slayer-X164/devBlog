@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser'
 import { connectDB } from './db/db.js'
 import authRoute from './routes/auth.route.js'
 import userRoute from './routes/user.route.js'
+import categoryRoute from './routes/category.route.js'
 
 dotenv.config()
 
@@ -23,6 +24,7 @@ connectDB(process.env.DB_URI)
 //route
 app.use('/api',authRoute)
 app.use('/api',userRoute)
+app.use('/api',categoryRoute)
 
 app.listen(port,()=>{
     console.log("server is running on port", port);

@@ -4,10 +4,10 @@ export const categoriesRoute = "/categories"
 export const addCategoryRoute = "/add-category"
 export const signInRoute = "/sign-in"
 export const signUpRoute = "/sign-up"
-export const editCategoryRoute = (category_id)=>{
-    if(category_id){
-        return `/edit-category/${category_id}`
+export const editCategoryRoute = (categoryId)=>{
+    if(categoryId){
+        return `/category/update-category/${categoryId}`
     }else{
-        return `/edit-category/:category_id`
+        return `/category/update-category/:categoryId`
     }
 }

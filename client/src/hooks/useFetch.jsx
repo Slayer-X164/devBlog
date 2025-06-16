@@ -15,7 +15,7 @@ export const useFetch = (API_URL, options = {}, dependencies = []) => {
           console.log(response.statusText,response.status);
 
         }
-     
+
 
         setData(responseData);
         setError(null);
