@@ -41,13 +41,14 @@ const EditCategory = () => {
           import.meta.env.VITE_API_BASE_URL
         }/category/update-category/${categoryId}`,
         {
-          method: "put",
+          method: "PUT",
           headers: { "Content-type": "application/json" },
-          credentials: true,
+          credentials: "include",
           body: JSON.stringify(result),
         }
       );
       const responseData = await response.json();
+   
 
       showToast("success", responseData.message);
     } catch (error) {
@@ -79,8 +80,6 @@ const EditCategory = () => {
     });
     if (result.success) {
       updateCategoryApiFunction(result.data);
-      setCatName("");
-      setSlug("");
       setCatError({ catName: "", catSlug: "" });
     } else {
       const fieldErrors = result.error.flatten().fieldErrors;

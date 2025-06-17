@@ -7,10 +7,11 @@ import { addCategoryRoute, editCategoryRoute } from "@/pages/pageRoutes";
 import { useFetch } from "@/hooks/useFetch";
 import Loading from "./Loading";
 import { showToast } from "@/features/showToast";
+import { Type } from "lucide-react";
 
 const Categories = () => {
-  
-  const {
+  const [refresh, setRefresh] = useState(false);
+  let {
     data: categoryData,
     loading,
     error,
@@ -19,12 +20,32 @@ const Categories = () => {
     {
       method: "get",
       credentials: "include",
-    }
+    },
+    [refresh]
   );
-  if (categoryData) {
-    console.log(categoryData);
-  }
+  // if (categoryData) {
+  //   console.log(categoryData);
+  // }
+  const handleDelete = async (id) => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/category/delete-category/${id}`,
+        {
+          method: "delete",
+          credentials: "include",
+        }
+      );
 
+      const responseData = await response.json();
+
+      if (response) {
+        setRefresh(!refresh);
+        showToast("success", "category deleted");
+      }
+    } catch (error) {
+      showToast("error", "error while deleting");
+    }
+  };
   return (
     <div className=" text-slate-300  rounded-lg shadow-xl w-full mx-10 my-4 overflow-scroll">
       {loading && <Loading />}
@@ -62,12 +83,15 @@ const Categories = () => {
                 <td className="py-4 px-3 text-purple-200">{category.slug}</td>
                 <td className="py-4 px-3">
                   <div className="flex gap-3">
-                    <button className="bg-[#1c1c2b] hover:bg-[#2a2a3d] p-2 rounded-md text-pink-400 transition cursor-pointer">
-                      <Link to={editCategoryRoute(category._id)}>
+                    <Link to={editCategoryRoute(category._id)}>
+                      <button className="bg-[#1c1c2b] hover:bg-[#2a2a3d] p-2 rounded-md text-pink-400 transition cursor-pointer">
                         <FiEdit2 size={16} />
-                      </Link>
-                    </button>
-                    <button className="bg-[#1c1c2b] hover:bg-[#2a2a3d] p-2 rounded-md text-pink-400 transition cursor-pointer">
+                      </button>
+                    </Link>
+                    <button
+                      onClick={() => handleDelete(category._id)}
+                      className="bg-[#1c1c2b] hover:bg-[#2a2a3d] p-2 rounded-md text-pink-400 transition cursor-pointer"
+                    >
                       <RiDeleteBin6Line size={16} />
                     </button>
                   </div>

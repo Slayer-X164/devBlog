@@ -20,8 +20,8 @@ export const showCategory = async (req, res, next) => {
   try {
     const { categoryId } = req.params;
     const category = await categoryModel.findById(categoryId);
-    if(!category){
-        next(errorHandler(404,"data not found"))
+    if (!category) {
+      next(errorHandler(404, "data not found"));
     }
     res.status(200).json({
       success: "true",
@@ -35,17 +35,40 @@ export const showCategory = async (req, res, next) => {
 export const updateCategory = async (req, res, next) => {
   try {
     const { categoryId } = req.params;
-    const categories = await categoryModel.findByIdAndUpdate();
+    const { name, slug } = req.body;
+
+    const updatedCategory = await categoryModel.findByIdAndUpdate(
+      categoryId,
+      {
+        name,
+        slug,
+      },
+      { new: true }
+    );
+
     res.status(200).json({
-      success: "true",
-      categories,
+      success: true,
+      message:"Changes Saved",
+      category:updatedCategory,
     });
   } catch (error) {
     next(errorHandler(500, error.message));
   }
 };
 
-export const deleteCategory = async (req, res, next) => {};
+export const deleteCategory = async (req, res, next) => {
+  try {
+    const { categoryId } = req.params;
+    const category = await categoryModel.findByIdAndDelete(categoryId)
+    res.status(200).json({
+      success:true,
+      message:"category deleted",
+      category
+    })
+  } catch (error) {
+    next(errorHandler(500,error.message))
+  }
+};
 
 export const showAllCategory = async (req, res, next) => {
   try {
