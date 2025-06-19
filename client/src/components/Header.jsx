@@ -11,6 +11,7 @@ import { FaPlus } from "react-icons/fa";
 import { VscSignOut } from "react-icons/vsc";
 import { removeUser } from "@/redux/user/user.slice";
 import { showToast } from "@/features/showToast";
+import { addBlogRoute, signInRoute } from "@/pages/pageRoutes";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -62,7 +63,7 @@ const Header = () => {
           />
         </div>
         <div>
-          <Link to='/'>
+          <Link to={user.isSignedIn?addBlogRoute:signInRoute}>
           <button className="cursor-pointer flex justify-center items-center gap-2 bg-blue-600 rounded-lg py-2 px-4 text-md">
             <FaPencilAlt />
             Write Post
@@ -111,7 +112,7 @@ const Header = () => {
                     Profile
                   </Link>
                   <Link
-                    to="/create-post"
+                    to={addBlogRoute}
                     className="text-md flex items-center gap-1  font-semibold text-slate-400 hover:bg-slate-800 rounded-lg  p-1 cursor-pointer w-full"
                   >
                     <FaPlus className="text-blue-500" />

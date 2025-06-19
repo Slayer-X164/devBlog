@@ -7,12 +7,12 @@ import { FaRegUser } from "react-icons/fa";
 import { GoDotFill } from "react-icons/go";
 import { MdOutlineCategory } from "react-icons/md";
 import { Link } from 'react-router-dom';
-import { categoriesRoute } from '@/pages/pageRoutes';
+import { blogRoute, categoriesRoute } from '@/pages/pageRoutes';
 const Sidebar = () => {
      const sidebarLinks = [
     { label: 'Home', path: '/' , icon: <FaHome />},
     { label: 'Categories', path: categoriesRoute, icon: <BiCategory />}  ,
-    { label: 'Blogs', path: '/blogs', icon: <IoDocumentTextOutline />} ,
+    { label: 'Blogs', path: blogRoute, icon: <IoDocumentTextOutline />} ,
     { label: 'Comments', path: '/comments', icon: <FaRegComment />} ,
     { label: 'Users', path: '/users', icon: <FaRegUser />} ,
   ];

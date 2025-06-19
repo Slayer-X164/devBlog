@@ -11,3 +11,12 @@ export const editCategoryRoute = (categoryId)=>{
         return `/category/update-category/:categoryId`
     }
 }
+export const blogRoute = "/blog"
+export const addBlogRoute = "/blog/add"
+export const updateBlogRoute = (blog_id)=>{
+    if(blog_id){
+        return `/blog/edit/${blog_id}`
+    }else{
+        return "/blog/edit/:blog_id"
+    }
+}

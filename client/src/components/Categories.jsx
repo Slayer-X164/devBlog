@@ -7,7 +7,7 @@ import { addCategoryRoute, editCategoryRoute } from "@/pages/pageRoutes";
 import { useFetch } from "@/hooks/useFetch";
 import Loading from "./Loading";
 import { showToast } from "@/features/showToast";
-import { Type } from "lucide-react";
+
 
 const Categories = () => {
   const [refresh, setRefresh] = useState(false);
