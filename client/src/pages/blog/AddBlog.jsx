@@ -10,14 +10,16 @@ import Loading from "@/components/Loading";
 import Dropzone from "react-dropzone";
 import { FaCamera } from "react-icons/fa";
 import Editor from "@/components/Editor";
+import { showToast } from "@/features/showToast";
+import { useSelector } from "react-redux";
 
 const AddBlog = () => {
   const [title, setTitle] = useState("");
   const [slug, setSlug] = useState("");
   const [blogContent, setBlogContent] = useState("");
   const [categoryOption, setCategoryOption] = useState([]);
-  const [file, setFile] = useState();
-  const [preview, setPreview] = useState();
+
+  const user = useSelector((state) => state.user);
 
   const [error, setError] = useState({
     title: "",
@@ -43,7 +45,37 @@ const AddBlog = () => {
       setCategoryOption(categoryData.categories);
     }
   }, [categoryData]);
+  const addBlogApiFunction = async (result) => {
+    const newResult = { ...result, author: user.user._id };
 
+    try {
+      loading = true;
+      const response = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/blog/add`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newResult),
+        }
+      );
+
+      const responseData = await response.json();
+      if (response) {
+        console.log(responseData);
+        showToast("success", responseData.message);
+        setSlug("")
+        setTitle("")
+      }
+    } catch (error) {
+      console.log(error.message);
+      showToast("error", error.message);
+    } finally {
+      loading = false;
+    }
+  };
   const blogFormSchema = z.object({
     title: z.string().min(3, "title must be atleast 3 character long"),
     category: z.string().min(3, "category must be atleast 3 character long"),
@@ -71,30 +103,23 @@ const AddBlog = () => {
       blogContent,
     });
     if (result.success) {
-      console.log(result.data);
       setError({ title: "", slug: "", category: "", blogContent: "" });
+      addBlogApiFunction(result.data);
     } else {
       const fieldErrors = result.error.flatten().fieldErrors;
       setError({
         title: fieldErrors.title,
         slug: fieldErrors.slug,
         category: fieldErrors.category,
-        blogContent: fieldErrors.blogContent
+        blogContent: fieldErrors.blogContent,
       });
     }
   };
-  const handleSelectedFile = (selectedFile) => {
-    const file = selectedFile[0];
-    setFile(file);
-    const preview = URL.createObjectURL(file);
-    setPreview(preview);
+
+  const handleEditorData = (e, editor) => {
+    const data = editor.getData();
+    setBlogContent(data);
   };
-  const handleEditorData = (e,editor)=>{
-    const data = editor.getData()
-    setBlogContent(data)
-
-
-  }
   return (
     <div className="w-full  flex justify-start  gap-6 items-center p-4 flex-col">
       <form
@@ -145,7 +170,7 @@ const AddBlog = () => {
             <h3 className="text-sm text-red-500 ">{error.category}</h3>
           )}
         </div>
-        <div className="w-full  flex text-slate-900 flex-col gap-2">
+        {/* <div className="w-full  flex text-slate-900 flex-col gap-2">
           <label className="text-lg">Featured Image</label>
           <Dropzone onDrop={(selectedFile) => handleSelectedFile(selectedFile)}>
             {({ getRootProps, getInputProps }) => (
@@ -166,12 +191,12 @@ const AddBlog = () => {
               </section>
             )}
           </Dropzone>
-        </div>
+        </div> */}
         {/* editor */}
         <div className=" w-full flex flex-col gap-2">
           <label className="text-lg ">Blog Content</label>
-          <Editor initialData={""} handleEditorData={handleEditorData}/>
-            {error.blogContent && (
+          <Editor initialData={""} handleEditorData={handleEditorData} />
+          {error.blogContent && (
             <h3 className="text-sm text-red-500 ">{error.blogContent}</h3>
           )}
         </div>
