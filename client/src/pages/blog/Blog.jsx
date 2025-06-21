@@ -1,13 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 import { FiEdit2 } from "react-icons/fi";
 import { IoMdAdd } from "react-icons/io";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { addBlogRoute, updateBlogRoute } from "../pageRoutes";
 import { z } from "zod";
+import { useFetch } from "@/hooks/useFetch";
+import { showToast } from "@/features/showToast";
 const Blog = () => {
-
-
+  const [refresh, setRefresh] = useState(false);
+  const {
+    data: allBlogData,
+    loading,
+    error: blogError,
+  } = useFetch(
+    `${import.meta.env.VITE_API_BASE_URL}/blog/get-all`,
+    {
+      method: "GET",
+      credentials: "include",
+    },
+    [refresh]
+  );
+  // if (allBlogData) {
+  //   console.log(allBlogData);
+  // }
+  const handleDeleteBlog = async (id) => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/blog/delete/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
+      const responseData = await response.json();
+      setRefresh(!refresh);
+      showToast("success", responseData.message);
+    } catch (error) {
+      showToast("error", error.message);
+    }
+  };
   return (
     <div className="text-slate-200 relative w-full h-[calc(100vh-72px)] bg-slate-950  flex justify-center p-4">
       <div className=" text-slate-300  rounded-lg shadow-xl w-full mx-10 my-4 overflow-scroll">
@@ -45,37 +76,42 @@ const Blog = () => {
             </tr>
           </thead>
           <tbody>
-            {/* {categoryData && categoryData.categories.length > 0 ? (
-            categoryData.categories.map((category, idx) => ( */}
-            <tr className="border-b border-gray-800 hover:bg-slate-950 transition rounded-lg ">
-              <td className="py-4 px-3">sidd</td>
-              <td className="py-4 px-3 ">Frontend</td>
-              <td className="py-4 px-3 text-blue-400">
-                How to Make cool animations
-              </td>
-              <td className="py-4 px-3 ">
-                How-to-Make-cool-animations
-              </td>
-              <td className="py-4 px-3 ">
-                23/1/2025
-              </td>
-              <td className="py-4 px-3">
-                <div className="flex gap-3">
-                  <Link to={updateBlogRoute()}>
-                    <button className="bg-[#1c1c2b] hover:bg-[#2a2a3d] p-2 rounded-md text-blue-400 transition cursor-pointer">
-                      <FiEdit2 size={16} />
-                    </button>
-                  </Link >
-                  <button className="bg-[#1c1c2b] hover:bg-[#2a2a3d] p-2 rounded-md text-blue-400 transition cursor-pointer">
-                    <RiDeleteBin6Line size={16} />
-                  </button>
-                </div>
-              </td>
-            </tr>
+            {allBlogData &&
+              allBlogData.allBlogs.map((eachBlog, idx) => (
+                <tr
+                  key={idx}
+                  className="border-b border-gray-800 hover:bg-slate-950 transition rounded-lg "
+                >
+                  <td className="py-4 px-3">{eachBlog.author.name}</td>
+                  <td className="py-4 px-3 ">{eachBlog.category.name}</td>
+                  <td className="py-4 px-3 text-blue-400">{eachBlog.title}</td>
+                  <td className="py-4 px-3 ">{eachBlog.slug}</td>
+                  <td className="py-4 px-3 ">
+                    {eachBlog.createdAt.slice(0, 10)}
+                  </td>
+                  <td className="py-4 px-3">
+                    <div className="flex gap-3">
+                      <Link to={updateBlogRoute(eachBlog._id)}>
+                        <button className="bg-[#1c1c2b] hover:bg-[#2a2a3d] p-2 rounded-md text-blue-400 transition cursor-pointer">
+                          <FiEdit2 size={16} />
+                        </button>
+                      </Link>
+                      <button
+                        onClick={() => handleDeleteBlog(eachBlog._id)}
+                        className="bg-[#1c1c2b] hover:bg-[#2a2a3d] p-2 rounded-md text-blue-400 transition cursor-pointer"
+                      >
+                        <RiDeleteBin6Line size={16} />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
 
-            <tr>
-              <td className="py-4 px-3">Data Not Found</td>
-            </tr>
+            {!allBlogData && (
+              <tr>
+                <td className="py-4 px-3">Data Not Found</td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>

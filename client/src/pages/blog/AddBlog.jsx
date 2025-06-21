@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import z from "zod";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IoMdArrowBack } from "react-icons/io";
 import { blogRoute } from "../pageRoutes";
 import slugify from "slugify";
@@ -14,6 +14,7 @@ import { showToast } from "@/features/showToast";
 import { useSelector } from "react-redux";
 
 const AddBlog = () => {
+  const navigate = useNavigate()
   const [title, setTitle] = useState("");
   const [slug, setSlug] = useState("");
   const [blogContent, setBlogContent] = useState("");
@@ -64,8 +65,8 @@ const AddBlog = () => {
 
       const responseData = await response.json();
       if (response) {
-        console.log(responseData);
         showToast("success", responseData.message);
+        navigate('/blog')
         setSlug("")
         setTitle("")
       }
@@ -170,28 +171,7 @@ const AddBlog = () => {
             <h3 className="text-sm text-red-500 ">{error.category}</h3>
           )}
         </div>
-        {/* <div className="w-full  flex text-slate-900 flex-col gap-2">
-          <label className="text-lg">Featured Image</label>
-          <Dropzone onDrop={(selectedFile) => handleSelectedFile(selectedFile)}>
-            {({ getRootProps, getInputProps }) => (
-              <section>
-                <div {...getRootProps()} className=" w-36">
-                  <input {...getInputProps()} className="" />
-                  <div className="relative  rounded-lg w-36">
-                    <img
-                      src={preview ? preview : "user.png"}
-                      alt=""
-                      className="rounded-md min-w-36 min-h-26 border-2 border-dashed border-slate-400"
-                    />
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-slate-500/30 flex cursor-pointer justify-center items-center w-full h-full rounded-lg overflow-hidden ">
-                      <FaCamera className="text-2xl text-slate-800" />
-                    </div>
-                  </div>
-                </div>
-              </section>
-            )}
-          </Dropzone>
-        </div> */}
+       
         {/* editor */}
         <div className=" w-full flex flex-col gap-2">
           <label className="text-lg ">Blog Content</label>
