@@ -4,6 +4,7 @@ import {
   deleteBlog,
   getAllBlog,
   getBlog,
+  getBlogForRead,
   updateBlog,
 } from "../controllers/blog.controller.js";
 const blogRoute = express.Router();
@@ -13,5 +14,6 @@ blogRoute.get("/blog/get/:blogId", getBlog);
 blogRoute.put("/blog/update/:blogId", updateBlog);
 blogRoute.delete("/blog/delete/:blogId", deleteBlog);
 blogRoute.get("/blog/get-all", getAllBlog);
+blogRoute.get("/blog/read/:slug", getBlogForRead);
 
 export default blogRoute;

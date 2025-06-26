@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { decode } from "entities";
 import { Link } from "react-router-dom";
 import { useMemo } from "react";
+import { blogReadRoute } from "@/pages/pageRoutes";
 const BlogCard = ({ props }) => {
   const user = useSelector((state) => state.user);
 
@@ -21,16 +22,19 @@ const BlogCard = ({ props }) => {
   };
   getReadTime(props.blogContent);
   const blogDescription = decode(text.replace(/<[^>]*>?/gm, ""));
-   const colorCombinations = useMemo(() => [
-    { bg: "bg-yellow-600/20", text: "text-yellow-400" },
-    { bg: "bg-green-600/20", text: "text-green-400" },
-    { bg: "bg-blue-600/20", text: "text-blue-400" },
-    { bg: "bg-purple-600/20", text: "text-purple-400" },
-    { bg: "bg-pink-600/20", text: "text-pink-400" },
-    { bg: "bg-red-600/20", text: "text-red-400" },
-    { bg: "bg-indigo-600/20", text: "text-indigo-400" },
-    { bg: "bg-teal-600/20", text: "text-teal-400" },
-  ], []);
+  const colorCombinations = useMemo(
+    () => [
+      { bg: "bg-yellow-600/20", text: "text-yellow-400" },
+      { bg: "bg-green-600/20", text: "text-green-400" },
+      { bg: "bg-blue-600/20", text: "text-blue-400" },
+      { bg: "bg-purple-600/20", text: "text-purple-400" },
+      { bg: "bg-pink-600/20", text: "text-pink-400" },
+      { bg: "bg-red-600/20", text: "text-red-400" },
+      { bg: "bg-indigo-600/20", text: "text-indigo-400" },
+      { bg: "bg-teal-600/20", text: "text-teal-400" },
+    ],
+    []
+  );
 
   // Function to get a random color combination
   const getRandomColor = () => {
@@ -68,16 +72,24 @@ const BlogCard = ({ props }) => {
         </div>
       </div>
 
-      <Link className="hover:underline transform duration-200 text-lg md:text-xl font-bold text-blue-400 ">
+      <Link
+        to={blogReadRoute(props.slug)}
+        className="hover:underline transform duration-200 text-lg md:text-xl font-bold text-blue-400 "
+      >
         {props.title}
       </Link>
 
-      <p style={{fontFamily:"Truculenta"}} className="text-sm text-slate-400 mt-2 line-clamp-2">
+      <p
+        style={{ fontFamily: "Truculenta" }}
+        className="text-sm text-slate-400 mt-2 line-clamp-2"
+      >
         {blogDescription}
       </p>
 
       <div className="flex gap-2 mt-4">
-        <span className={`${categoryColors.bg} ${categoryColors.text} text-xs px-2 py-1 rounded-md`}>
+        <span
+          className={`${categoryColors.bg} ${categoryColors.text} text-xs px-2 py-1 rounded-md`}
+        >
           {props.category.name}
         </span>
       </div>
@@ -91,7 +103,10 @@ const BlogCard = ({ props }) => {
             <FaRegComment /> 32
           </span>
         </div>
-        <Link  className="text-blue-400 hover:underline">
+        <Link
+          to={blogReadRoute(props.slug)}
+          className="text-blue-400 hover:underline"
+        >
           Read more →
         </Link>
       </div>

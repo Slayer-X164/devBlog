@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import logo from "@/assets/code.png"
 import { Link } from "react-router-dom";
 import { IoIosSearch } from "react-icons/io";
 import { FaPencilAlt } from "react-icons/fa";
@@ -50,7 +51,7 @@ const Header = () => {
   return (
     <header className=" w-full h-18 bg-slate-950 border-slate-900 border-b text-white flex items-center px-6 shadow justify-between">
       <Link to={IndexRoute} className="flex justify-center items-center gap-1">
-        <img src="code.png" alt="logo" className="w-10" />
+        <img src={logo} alt="logo" className="w-10" />
         <h1 className="text-2xl font-semibold font-mono">DevBlog</h1>
       </Link>
       <div className="flex items-center gap-6">

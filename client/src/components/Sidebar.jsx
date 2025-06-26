@@ -7,7 +7,7 @@ import { FaRegUser } from "react-icons/fa";
 import { GoDotFill } from "react-icons/go";
 import { MdOutlineCategory } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { blogRoute, categoriesRoute } from "@/pages/pageRoutes";
+import { blogRoute, categoriesRoute, IndexRoute } from "@/pages/pageRoutes";
 import { useFetch } from "@/hooks/useFetch";
 const Sidebar = () => {
   let {
@@ -22,26 +22,20 @@ const Sidebar = () => {
     }
   );
   const sidebarLinks = [
-    { label: "Home", path: "/", icon: <FaHome /> },
+    { label: "Home", path: IndexRoute, icon: <FaHome />,color:"oklch(70.7% 0.165 254.624) " },
     { label: "Categories", path: categoriesRoute, icon: <BiCategory /> },
     { label: "Blogs", path: blogRoute, icon: <IoDocumentTextOutline /> },
     { label: "Comments", path: "/comments", icon: <FaRegComment /> },
     { label: "Users", path: "/users", icon: <FaRegUser /> },
   ];
-  const categoryLinks = [
-    { label: "Javascript", path: "/", icon: <GoDotFill /> },
-    { label: "Python", path: "/", icon: <GoDotFill /> },
-    { label: "React", path: "/", icon: <GoDotFill /> },
-    { label: "Frontend", path: "/", icon: <GoDotFill /> },
-    { label: "Fullstack", path: "/", icon: <GoDotFill /> },
-    { label: "UI/UX", path: "/", icon: <GoDotFill /> },
-  ];
+
   return (
     <div className="h-[calc(100vh-72px)] w-96 bg-slate-950 text-white pr-6 py-8 flex gap-6 flex-col">
       <div className="bg-slate-900/50 w-full border-1 border-slate-800 rounded-lg flex flex-col gap-3 p-4">
-        { sidebarLinks.map(({ label, path, icon }, index) => (
+        { sidebarLinks.map(({ label, path, icon,color }, index) => (
           <div key={index}>
             <Link
+            style={{color: color}}
               to={path}
               className="hover:text-slate-200 flex items-center gap-1 text-slate-400"
             >

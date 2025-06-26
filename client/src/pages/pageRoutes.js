@@ -20,3 +20,10 @@ export const updateBlogRoute = (blog_id)=>{
         return "/blog/edit/:blog_id"
     }
 }
+export const blogReadRoute = (slug)=>{
+    if(slug){
+        return `/read/${slug}`
+    }else{
+        return `/read/:slug`
+    }
+}

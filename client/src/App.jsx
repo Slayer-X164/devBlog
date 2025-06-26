@@ -19,30 +19,35 @@ import {
   blogRoute,
   addBlogRoute,
   updateBlogRoute,
+  blogReadRoute,
 } from "./pages/pageRoutes";
 import Blog from "./pages/blog/Blog";
 import AddBlog from "./pages/blog/AddBlog";
 import EditBlog from "./pages/blog/EditBlog";
+import BlogRead from "./pages/BlogRead";
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path={IndexRoute} element={<Layout />}>
+        
           <Route path={IndexRoute} element={<Index />} />
           <Route path={profileRoute} element={<Profile />} />
-          {/* categories start*/}
+
+          {/* categories */}
           <Route path={categoriesRoute} element={<CategoryDetails />} />
           <Route path={addCategoryRoute} element={<AddCategory />} />
           <Route path={editCategoryRoute()} element={<EditCategory />} />
-          {/* categories end*/}
 
-          {/* blog start */}
+          {/* blog  */}
           <Route path={blogRoute} element={<Blog />} />
           <Route path={addBlogRoute} element={<AddBlog />} />
           <Route path={updateBlogRoute()} element={<EditBlog />} />
-          {/* blog end */}
-          
+
+          {/* blog read  */}
+          <Route path={blogReadRoute()} element={<BlogRead />} />
+
         </Route>
         <Route path={signInRoute} element={<Signin />} />
         <Route path={signUpRoute} element={<Signup />} />

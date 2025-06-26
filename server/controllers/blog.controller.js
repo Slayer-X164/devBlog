@@ -91,7 +91,7 @@ export const getAllBlog = async (req, res, next) => {
     const allBlogs = await Blog.find()
       .populate("author", "name photoURL role")
       .populate("category", "name")
-      .sort({ created_at: 1 })
+      .sort({ createdAt: -1 })
       .lean()
       .exec();
     res.status(200).json({
@@ -102,3 +102,20 @@ export const getAllBlog = async (req, res, next) => {
     next(errorHandler(500, error.message));
   }
 };
+
+export const getBlogForRead = async (req,res,next) => {
+   try {
+    const { slug } = req.params;
+    const blog = await Blog.findOne({slug})
+      .populate("author", "name photoURL role")
+      .populate("category", "name slug")
+      .lean()
+      .exec();
+    res.status(200).json({
+      success: true,
+      blog,
+    });
+  } catch (error) {
+    next(errorHandler(500, error.message));
+  }
+}
