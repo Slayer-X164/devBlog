@@ -6,7 +6,9 @@ import { categoriesRoute } from "../pageRoutes";
 import slugify from "slugify";
 import { showToast } from "@/features/showToast";
 import Loading from "@/components/Loading";
+import { useSelector } from "react-redux";
 const AddCategory = () => {
+  
   const [catName, setCatName] = useState("");
   const [catSlug, setSlug] = useState("");
   const [catError, setCatError] = useState({ catName: "", catSlug: "" });

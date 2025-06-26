@@ -28,6 +28,7 @@ const blogSchema = new mongoose.Schema(
       trim: true,
       ref: "User",
     },
+
   },
   { timestamps: true }
 );

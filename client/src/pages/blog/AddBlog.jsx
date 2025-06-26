@@ -14,7 +14,7 @@ import { showToast } from "@/features/showToast";
 import { useSelector } from "react-redux";
 
 const AddBlog = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [slug, setSlug] = useState("");
   const [blogContent, setBlogContent] = useState("");
@@ -47,7 +47,11 @@ const AddBlog = () => {
     }
   }, [categoryData]);
   const addBlogApiFunction = async (result) => {
-    const newResult = { ...result, author: user.user._id };
+    const newResult = {
+      ...result,
+      author: user.user._id,
+      
+    };
 
     try {
       loading = true;
@@ -66,9 +70,9 @@ const AddBlog = () => {
       const responseData = await response.json();
       if (response) {
         showToast("success", responseData.message);
-        navigate('/blog')
-        setSlug("")
-        setTitle("")
+        navigate("/blog");
+        setSlug("");
+        setTitle("");
       }
     } catch (error) {
       console.log(error.message);
@@ -171,7 +175,7 @@ const AddBlog = () => {
             <h3 className="text-sm text-red-500 ">{error.category}</h3>
           )}
         </div>
-       
+
         {/* editor */}
         <div className=" w-full flex flex-col gap-2">
           <label className="text-lg ">Blog Content</label>

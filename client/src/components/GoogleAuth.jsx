@@ -32,6 +32,7 @@ const GoogleAuth = () => {
         ...userData,
         _id: data.user.id,
         photoURL: data.user.photoURL,
+        role:data.user.role
       };
 
       if (!response.ok) {

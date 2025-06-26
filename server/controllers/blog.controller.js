@@ -18,6 +18,7 @@ export const addBlog = async (req, res, next) => {
       category: foundCategory._id,
       blogContent: encode(blogContent),
       author: author,
+
     });
     await blog.save();
     res.status(200).json({
@@ -33,7 +34,7 @@ export const getBlog = async (req, res, next) => {
   try {
     const { blogId } = req.params;
     const blog = await Blog.findById(blogId)
-      .populate("author", "name")
+      .populate("author", "name photoURL")
       .populate("category", "name")
       .exec();
     if (!blog) {
@@ -88,7 +89,7 @@ export const deleteBlog = async (req, res, next) => {
 export const getAllBlog = async (req, res, next) => {
   try {
     const allBlogs = await Blog.find()
-      .populate("author", "name")
+      .populate("author", "name photoURL role")
       .populate("category", "name")
       .sort({ created_at: 1 })
       .lean()

@@ -11,7 +11,7 @@ import { FaPlus } from "react-icons/fa";
 import { VscSignOut } from "react-icons/vsc";
 import { removeUser } from "@/redux/user/user.slice";
 import { showToast } from "@/features/showToast";
-import { addBlogRoute, signInRoute } from "@/pages/pageRoutes";
+import { addBlogRoute, IndexRoute, signInRoute } from "@/pages/pageRoutes";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -48,11 +48,11 @@ const Header = () => {
     }
   };
   return (
-    <header className=" w-full h-18 bg-slate-950 border-slate-900 border-b text-white flex items-center px-6 shadow justify-around">
-      <div className="flex justify-center items-center gap-1">
+    <header className=" w-full h-18 bg-slate-950 border-slate-900 border-b text-white flex items-center px-6 shadow justify-between">
+      <Link to={IndexRoute} className="flex justify-center items-center gap-1">
         <img src="code.png" alt="logo" className="w-10" />
         <h1 className="text-2xl font-semibold font-mono">DevBlog</h1>
-      </div>
+      </Link>
       <div className="flex items-center gap-6">
         <div className="flex items-center justify gap-2 p-2 rounded-lg border border-slate-700  bg-slate-900/50 text-neutral-500">
           <IoIosSearch />
@@ -93,7 +93,7 @@ const Header = () => {
             <div>{dropdownIsOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}</div>
           </div>
           {dropdownIsOpen && (
-            <div className="p-[1px] z-10 absolute top-14 -left-20 rounded-lg bg-gradient-to-br from-indigo-200 via-indigo-500 to-indigo-950 cursor-default">
+            <div className="p-[1px] z-10 absolute top-14 -left-27 rounded-lg bg-gradient-to-br from-indigo-200 via-indigo-500 to-indigo-950 cursor-default">
               <div className="min-w-60 py-2 px-4  bg-slate-950  rounded-lg flex justify-center flex-col">
                 <div className="w-full flex items-start flex-col p-1.5 border-b pb-2 border-slate-700">
                   <h2 className="text-lg text-slate-300 font-semibold">
