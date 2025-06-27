@@ -7,8 +7,13 @@ import { BsEmojiDizzy } from "react-icons/bs";
 import { FaGithub } from "react-icons/fa";
 import Loading from "@/components/Loading";
 import { decode } from "entities";
+import Comments from "@/components/Comments";
+import { LiaCommentsSolid } from "react-icons/lia";
+import { useSelector } from "react-redux";
+import { PiSignIn } from "react-icons/pi";
 const BlogRead = () => {
   const { slug } = useParams();
+  const user = useSelector((state) => state.user);
   let {
     data: blogData,
     loading,
@@ -83,9 +88,11 @@ const BlogRead = () => {
 
             {/* Content */}
             <div
-              dangerouslySetInnerHTML={blogData &&{
-                __html: decode( blogData.blog.blogContent) || "",
-              }}
+              dangerouslySetInnerHTML={
+                blogData && {
+                  __html: decode(blogData.blog.blogContent) || "",
+                }
+              }
               className="space-y-4 text-lg leading-relaxed"
             ></div>
 
@@ -102,8 +109,20 @@ const BlogRead = () => {
             {/* Divider */}
             <hr className="my-10 border-gray-300 dark:border-gray-700" />
 
-            {/* Why tho? */}
-            <h2 className="text-2xl font-bold mb-2">Comments</h2>
+            <h2 className="flex items-center gap-2 text-2xl font-bold pb-4">
+              <LiaCommentsSolid className="text-blue-500" /> Comments
+            </h2>
+            {user.isSignedIn ? (
+              <Comments props={blogData} />
+            ) : (
+              <Link
+                to="/sign-in"
+                className="cursor-pointer flex justify-center items-center gap-2 bg-indigo-600 rounded-lg py-2 px-4 text-md"
+              >
+                <PiSignIn />
+                Sign in to comment
+              </Link>
+            )}
           </div>
         )}
       </div>
