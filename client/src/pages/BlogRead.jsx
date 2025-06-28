@@ -11,7 +11,9 @@ import Comments from "@/components/Comments";
 import { LiaCommentsSolid } from "react-icons/lia";
 import { useSelector } from "react-redux";
 import { PiSignIn } from "react-icons/pi";
+import EachComment from "@/components/EachComment";
 const BlogRead = () => {
+
   const { slug } = useParams();
   const user = useSelector((state) => state.user);
   let {
@@ -24,7 +26,6 @@ const BlogRead = () => {
   });
   let formatedDate;
   if (blogData) {
-    console.log(blogData);
     const rawDate = blogData.blog.createdAt;
     const date = new Date(rawDate);
     formatedDate = date.toLocaleDateString("en-GB");
@@ -109,11 +110,9 @@ const BlogRead = () => {
             {/* Divider */}
             <hr className="my-10 border-gray-300 dark:border-gray-700" />
 
-            <h2 className="flex items-center gap-2 text-2xl font-bold pb-4">
-              <LiaCommentsSolid className="text-blue-500" /> Comments
-            </h2>
+
             {user.isSignedIn ? (
-              <Comments props={blogData} />
+             blogData && <Comments props={blogData} />
             ) : (
               <Link
                 to="/sign-in"
@@ -123,6 +122,7 @@ const BlogRead = () => {
                 Sign in to comment
               </Link>
             )}
+            
           </div>
         )}
       </div>

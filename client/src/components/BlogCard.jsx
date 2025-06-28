@@ -4,9 +4,10 @@ import { decode } from "entities";
 import { Link } from "react-router-dom";
 import { useMemo } from "react";
 import { blogReadRoute } from "@/pages/pageRoutes";
+import CommentCount from "./CommentCount";
 const BlogCard = ({ props }) => {
   const user = useSelector((state) => state.user);
-
+  
   const rawDate = props.createdAt;
   const date = new Date(rawDate);
   const formatedDate = date.toLocaleDateString("en-GB");
@@ -100,7 +101,7 @@ const BlogCard = ({ props }) => {
             <FaRegHeart /> 189
           </span>
           <span className="flex items-center gap-1">
-            <FaRegComment /> 32
+            <CommentCount blogId={props._id}/>
           </span>
         </div>
         <Link
