@@ -5,9 +5,10 @@ import { Link } from "react-router-dom";
 import { useMemo } from "react";
 import { blogReadRoute } from "@/pages/pageRoutes";
 import CommentCount from "./CommentCount";
+import { useFetch } from "@/hooks/useFetch";
 const BlogCard = ({ props }) => {
   const user = useSelector((state) => state.user);
-  
+
   const rawDate = props.createdAt;
   const date = new Date(rawDate);
   const formatedDate = date.toLocaleDateString("en-GB");
@@ -45,7 +46,18 @@ const BlogCard = ({ props }) => {
 
   // Get random colors for the category
   const categoryColors = useMemo(() => getRandomColor(), []);
+  const {
+    data: likeData,
+    loading,
+    error,
+  } = useFetch(
+    `${import.meta.env.VITE_API_BASE_URL}/blog/like-count/${props._id}`,
+    {
+      method: "get",
+      credentials: "include",
+    },
 
+  );
   return (
     <div className="bg-slate-900 text-white rounded-xl p-4 shadow-lg border border-slate-800 hover:border-slate-600 hover:drop-shadow-2xl hover:drop-shadow-slate-950 cursor-default transition-all duration-100   w-full max-w-md sm:max-w-lg lg:max-w-xl xl:max-w-2xl mx-auto">
       <div className="flex items-center gap-3 mb-2">
@@ -98,10 +110,10 @@ const BlogCard = ({ props }) => {
       <div className="flex items-center justify-between mt-6 border-t border-slate-800 pt-3 text-slate-400 text-sm">
         <div className="flex items-center gap-4">
           <span className="flex items-center gap-1">
-            <FaRegHeart /> 189
+            <FaRegHeart /> {likeData&&likeData.totalLikeCount}
           </span>
           <span className="flex items-center gap-1">
-            <CommentCount blogId={props._id}/>
+            <CommentCount blogId={props._id} />
           </span>
         </div>
         <Link

@@ -8,6 +8,7 @@ import userRoute from "./routes/user.route.js";
 import categoryRoute from "./routes/category.route.js";
 import blogRoute from "./routes/blog.route.js";
 import commentRoute from "./routes/comment.route.js";
+import likeRouter from "./routes/like.route.js";
 
 dotenv.config();
 
@@ -31,6 +32,7 @@ app.use("/api", userRoute);
 app.use("/api", categoryRoute);
 app.use("/api", blogRoute);
 app.use("/api", commentRoute);
+app.use("/api", likeRouter);
 
 app.listen(port, () => {
   console.log("server is running on port", port);

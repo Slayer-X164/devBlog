@@ -1,5 +1,5 @@
 import { useFetch } from "@/hooks/useFetch";
-import React from "react";
+import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { FaHeart, FaFire, FaHandsHelping, FaGrinStars } from "react-icons/fa";
 import { GiDolphin } from "react-icons/gi";
@@ -11,7 +11,10 @@ import Comments from "@/components/Comments";
 import { LiaCommentsSolid } from "react-icons/lia";
 import { useSelector } from "react-redux";
 import { PiSignIn } from "react-icons/pi";
+import { FaRegHeart } from "react-icons/fa";
 import EachComment from "@/components/EachComment";
+import confetti from "canvas-confetti";
+import Like from "@/components/Like";
 const BlogRead = () => {
 
   const { slug } = useParams();
@@ -68,11 +71,7 @@ const BlogRead = () => {
                   </p>
                 </div>
               </div>
-              <div className="flex gap-4 text-md mb-4">
-                <span className="flex items-center rounded-lg gap-1 bg-pink-500/20 py-1 px-2">
-                  <FaHeart className="text-pink-700" /> 10
-                </span>
-              </div>
+                  {blogData && user.isSignedIn && <Like blogId={blogData.blog._id}/>}
             </div>
 
             {/* Title */}
@@ -94,7 +93,7 @@ const BlogRead = () => {
                   __html: decode(blogData.blog.blogContent) || "",
                 }
               }
-              className="space-y-4 text-lg leading-relaxed"
+              className="space-y-4 text-lg  text-slate-300"
             ></div>
 
             {/* Button */}
@@ -110,19 +109,17 @@ const BlogRead = () => {
             {/* Divider */}
             <hr className="my-10 border-gray-300 dark:border-gray-700" />
 
-
             {user.isSignedIn ? (
-             blogData && <Comments props={blogData} />
+              blogData && <Comments props={blogData} />
             ) : (
               <Link
                 to="/sign-in"
                 className="cursor-pointer flex justify-center items-center gap-2 bg-indigo-600 rounded-lg py-2 px-4 text-md"
               >
                 <PiSignIn />
-                Sign in to comment
+                Sign in to Like & Comment
               </Link>
             )}
-            
           </div>
         )}
       </div>
