@@ -142,3 +142,26 @@ export const getBlogByCategory = async (req, res, next) => {
     next(errorHandler(500, error.message));
   }
 };
+
+export const searchBlog = async (req, res, next) => {
+  try {
+    const { query } = req.query;
+
+    const searchResult = await Blog.find({
+      title: { $regex: query, $options: "i" },
+    })
+      .populate("author", "name photoURL role")
+      .populate("category", "name")
+      .sort({ createdAt: -1 })
+      .lean()
+      .exec();
+    res.status(200).json({
+      success: true,
+      searchResult,
+    });
+
+    res.status;
+  } catch (error) {
+    next(errorHandler(500, error.message));
+  }
+};

@@ -34,3 +34,11 @@ export const getBlogByCategoryRoute = (category) => {
     return `/blog/get-all/${category}`;
   }
 };
+
+export const searchRoute = (query) => {
+  if (query) {
+    return `/blog/search?query=${query}`;
+  } else {
+    return `/blog/search`;
+  }
+};

@@ -13,6 +13,7 @@ import { VscSignOut } from "react-icons/vsc";
 import { removeUser } from "@/redux/user/user.slice";
 import { showToast } from "@/features/showToast";
 import { addBlogRoute, IndexRoute, signInRoute } from "@/pages/pageRoutes";
+import Search from "./Search";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -55,14 +56,8 @@ const Header = () => {
         <h1 className="text-2xl font-semibold font-mono">DevBlog</h1>
       </Link>
       <div className="flex items-center gap-6">
-        <div className="flex items-center justify gap-2 p-2 rounded-lg border border-slate-700  bg-slate-900/50 text-neutral-500">
-          <IoIosSearch />
-          <input
-            type="text"
-            placeholder="search..."
-            className="w-56 outline-none border-none"
-          />
-        </div>
+        {/* search */}
+        <Search/>
         <div>
           <Link to={user.isSignedIn?addBlogRoute:signInRoute}>
           <button className="cursor-pointer flex justify-center items-center gap-2 bg-blue-600 rounded-lg py-2 px-4 text-md">

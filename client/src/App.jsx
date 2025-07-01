@@ -21,12 +21,14 @@ import {
   updateBlogRoute,
   blogReadRoute,
   getBlogByCategoryRoute,
+  searchRoute,
 } from "./pages/pageRoutes";
 import Blog from "./pages/blog/Blog";
 import AddBlog from "./pages/blog/AddBlog";
 import EditBlog from "./pages/blog/EditBlog";
 import BlogRead from "./pages/BlogRead";
 import BlogByCategory from "./pages/BlogByCategory";
+import SearchResult from "./pages/SearchResult";
 
 const App = () => {
   return (
@@ -50,7 +52,8 @@ const App = () => {
           <Route path={blogReadRoute()} element={<BlogRead />} />
           {/* blog by category */}
           <Route path={getBlogByCategoryRoute()} element={<BlogByCategory />} />
-          
+          {/* Search result page */}
+          <Route path={searchRoute()} element={<SearchResult />} />
         </Route>
         <Route path={signInRoute} element={<Signin />} />
         <Route path={signUpRoute} element={<Signup />} />

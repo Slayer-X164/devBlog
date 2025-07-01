@@ -6,6 +6,7 @@ import {
   getBlog,
   getBlogByCategory,
   getBlogForRead,
+  searchBlog,
   updateBlog,
 } from "../controllers/blog.controller.js";
 const blogRoute = express.Router();
@@ -17,5 +18,6 @@ blogRoute.delete("/blog/delete/:blogId", deleteBlog);
 blogRoute.get("/blog/get-all", getAllBlog);
 blogRoute.get("/blog/read/:slug", getBlogForRead);
 blogRoute.get("/blog/get-all/:category", getBlogByCategory);
+blogRoute.get("/blog/search",searchBlog );
 
 export default blogRoute;
