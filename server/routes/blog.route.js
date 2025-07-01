@@ -4,6 +4,7 @@ import {
   deleteBlog,
   getAllBlog,
   getBlog,
+  getBlogByCategory,
   getBlogForRead,
   updateBlog,
 } from "../controllers/blog.controller.js";
@@ -15,5 +16,6 @@ blogRoute.put("/blog/update/:blogId", updateBlog);
 blogRoute.delete("/blog/delete/:blogId", deleteBlog);
 blogRoute.get("/blog/get-all", getAllBlog);
 blogRoute.get("/blog/read/:slug", getBlogForRead);
+blogRoute.get("/blog/get-all/:category", getBlogByCategory);
 
 export default blogRoute;

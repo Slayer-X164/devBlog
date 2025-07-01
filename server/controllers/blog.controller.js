@@ -18,7 +18,6 @@ export const addBlog = async (req, res, next) => {
       category: foundCategory._id,
       blogContent: encode(blogContent),
       author: author,
-
     });
     await blog.save();
     res.status(200).json({
@@ -103,10 +102,10 @@ export const getAllBlog = async (req, res, next) => {
   }
 };
 
-export const getBlogForRead = async (req,res,next) => {
-   try {
+export const getBlogForRead = async (req, res, next) => {
+  try {
     const { slug } = req.params;
-    const blog = await Blog.findOne({slug})
+    const blog = await Blog.findOne({ slug })
       .populate("author", "name photoURL role")
       .populate("category", "name slug")
       .lean()
@@ -118,4 +117,28 @@ export const getBlogForRead = async (req,res,next) => {
   } catch (error) {
     next(errorHandler(500, error.message));
   }
-}
+};
+export const getBlogByCategory = async (req, res, next) => {
+  try {
+    const { category } = req.params;
+    const categoryData = await Category.findOne({ slug: category });
+    if (!categoryData) {
+      return next(errorHandler(404, "no blog available in this category"));
+    } else {
+      const categoryId = categoryData._id;
+      const blogs = await Blog.find({ category: categoryId })
+        .populate("author", "name photoURL role")
+        .populate("category", "name")
+        .sort({ createdAt: -1 })
+        .lean()
+        .exec();
+      res.status(200).json({
+        success: true,
+        blogs,
+      });
+    }
+    res.status;
+  } catch (error) {
+    next(errorHandler(500, error.message));
+  }
+};
