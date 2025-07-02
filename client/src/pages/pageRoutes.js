@@ -42,3 +42,5 @@ export const searchRoute = (query) => {
     return `/blog/search`;
   }
 };
+export const blogAllCommentsRoute = "/blog/all-comments"
+export const usersAllDetailRoute = "/blog/all-users"

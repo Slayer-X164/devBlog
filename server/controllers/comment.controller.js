@@ -34,3 +34,34 @@ export const getComments = async (req, res, next) => {
     next(errorHandler((500, error.message)));
   }
 };
+export const getAllComments = async (req, res, next) => {
+  try {
+    const comments = await Comments.find()
+      .populate("author", "name ")
+      .populate("blogId", "title")
+      .sort({ createdAt: -1 })
+      .lean()
+      .exec();
+    res.status(200).json({
+      success: true,
+      comments,
+    });
+  } catch (error) {
+    next(errorHandler(500, error.message));
+  }
+};
+export const deleteCommentById = async (req, res, next) => {
+  try {
+    const { commentId } = req.params;
+    const comment = await Comments.findByIdAndDelete(commentId);
+    if (!comment) {
+      return next(errorHandler(404, "comment not found"));
+    }
+    res.status(200).json({
+      success: true,
+      message: "comment deleted",
+    });
+  } catch (error) {
+    next(errorHandler(500, error.message));
+  }
+};

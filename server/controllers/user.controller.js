@@ -54,3 +54,33 @@ export const updateUser = async (req, res, next) => {
     next(errorHandler(500, error.message));
   }
 };
+export const getAllUser = async (req, res, next) => {
+  try {
+
+    const user = await userModel.find();
+    if (!user) {
+      next(errorHandler(404, "user not found"));
+    }
+    res.status(200).json({
+      success: true,
+      user,
+    });
+  } catch (error) {
+    next(errorHandler(500, error.message));
+  }
+};
+export const deleteUserById = async (req, res, next) => {
+  try {
+    const {id} = req.params
+    const user = await userModel.findByIdAndDelete(id);
+    if (!user) {
+      next(errorHandler(404, "user not found"));
+    }
+    res.status(200).json({
+      success: true,
+      message:"user deleted"
+    });
+  } catch (error) {
+    next(errorHandler(500, error.message));
+  }
+};
