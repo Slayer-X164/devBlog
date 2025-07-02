@@ -48,11 +48,11 @@ const UsersDetail = () => {
     }
   };
   return (
-    <div className="text-slate-200 relative w-full h-[calc(100vh-72px)] bg-slate-950  flex justify-center p-4">
-      <div className=" text-slate-300  rounded-lg shadow-xl w-full mx-10 my-4 overflow-scroll">
+    <div className="text-slate-200 relative w-full h-[calc(100vh-72px)] bg-slate-950  ">
+      <div className=" text-slate-300  rounded-lg shadow-xl w-full mx-10 my-4 overflow-scroll flex justify-center p-4 items-center flex-col">
         {loading && <Loading />}
         <div className="w-full flex justify-center mb-4 "></div>
-        <table className="w-full table-auto text-left bg- border-1 border-slate-800 ">
+        <table className="w-3/4 table-auto text-left bg- border-1 border-slate-800 ">
           <thead className="bg-slate-900 ">
             <tr className="">
               <th className="py-4 px-3 text-sm tracking-wider text-slate-400">

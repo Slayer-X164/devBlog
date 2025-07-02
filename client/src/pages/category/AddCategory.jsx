@@ -8,7 +8,7 @@ import { showToast } from "@/features/showToast";
 import Loading from "@/components/Loading";
 import { useSelector } from "react-redux";
 const AddCategory = () => {
-  
+
   const [catName, setCatName] = useState("");
   const [catSlug, setSlug] = useState("");
   const [catError, setCatError] = useState({ catName: "", catSlug: "" });
@@ -87,7 +87,7 @@ const AddCategory = () => {
             value={catName}
             onChange={handleChangeName}
             type="text"
-            placeholder="Enter Your Name"
+            placeholder="Enter Category Name"
             className="p-2 w-full rounded-md bg-slate-800/50 outline-none"
           />
           {catError.catName && (
@@ -100,7 +100,7 @@ const AddCategory = () => {
             value={catSlug}
             onChange={(e) => setSlug(e.target.value)}
             type="text"
-            placeholder="Enter Your Name"
+            placeholder="Enter Category Name"
             className="p-2 w-full rounded-md bg-slate-800/50 outline-none"
           />
           {catError.catSlug && (
