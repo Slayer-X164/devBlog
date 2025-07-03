@@ -60,7 +60,7 @@ const Header = () => {
         <Search/>
         <div>
           <Link to={user.isSignedIn?addBlogRoute:signInRoute}>
-          <button className="cursor-pointer flex justify-center items-center gap-2 bg-blue-600 rounded-lg py-2 px-4 text-md">
+          <button className="cursor-pointer flex justify-center items-center gap-2 bg-gradient-to-br from-blue-300 via-blue-600 to-blue-950 rounded-lg py-2 px-4 text-md">
             <FaPencilAlt />
             Write Post
           </button>
@@ -69,7 +69,7 @@ const Header = () => {
       </div>
       {!user.isSignedIn ? (
         <div>
-          <Link to="/sign-in" className="cursor-pointer flex justify-center items-center gap-2 bg-indigo-600 rounded-lg py-2 px-4 text-md">
+          <Link to="/sign-in" className="cursor-pointer flex justify-center items-center gap-2 bg-gradient-to-br from-amber-200 via-amber-800 to-orange-950 rounded-lg py-2 px-4 text-md">
             <PiSignIn />
             Sign in
           </Link>

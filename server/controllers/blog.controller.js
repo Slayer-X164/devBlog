@@ -2,6 +2,7 @@ import errorHandler from "../middlewares/errorHandler.middleware.js";
 import Blog from "../models/Blog.model.js";
 import { encode } from "entities";
 import Category from "../models/category.model.js";
+import mongoose from "mongoose";
 
 export const addBlog = async (req, res, next) => {
   try {
@@ -101,7 +102,40 @@ export const getAllBlog = async (req, res, next) => {
     next(errorHandler(500, error.message));
   }
 };
+export const getAllBlogOfUser = async (req, res, next) => {
+  try {
+    const { id, role } = req.body;
 
+    if (!id || !role) {
+      return next(errorHandler(400, "Missing id or role"));
+    }
+
+    let allBlogs;
+
+    if (role === "admin") {
+      allBlogs = await Blog.find()
+        .populate("author", "name photoURL role")
+        .populate("category", "name")
+        .sort({ createdAt: -1 })
+        .lean()
+        .exec();
+    } else {
+      allBlogs = await Blog.find({ author: id })
+        .populate("author", "name photoURL role")
+        .populate("category", "name")
+        .sort({ createdAt: -1 })
+        .lean()
+        .exec();
+    }
+
+    res.status(200).json({
+      success: true,
+      allBlogs,
+    });
+  } catch (error) {
+    next(errorHandler(500, error.message));
+  }
+};
 export const getBlogForRead = async (req, res, next) => {
   try {
     const { slug } = req.params;
@@ -121,6 +155,7 @@ export const getBlogForRead = async (req, res, next) => {
 export const getBlogByCategory = async (req, res, next) => {
   try {
     const { category } = req.params;
+
     const categoryData = await Category.findOne({ slug: category });
     if (!categoryData) {
       return next(errorHandler(404, "no blog available in this category"));

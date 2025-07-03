@@ -24,7 +24,6 @@ import {
   searchRoute,
   blogAllCommentsRoute,
   usersAllDetailRoute,
-
 } from "./pages/pageRoutes";
 import Blog from "./pages/blog/Blog";
 import AddBlog from "./pages/blog/AddBlog";
@@ -34,6 +33,8 @@ import BlogByCategory from "./pages/BlogByCategory";
 import SearchResult from "./pages/SearchResult";
 import CommentsDetail from "./pages/CommentsDetail";
 import UsersDetail from "./pages/UsersDetail";
+import AuthRouteProtection from "./components/AuthRouteProtection";
+import AuthRouteAdminOnly from "./components/AuthRouteAdminOnly";
 
 const App = () => {
   return (
@@ -43,32 +44,33 @@ const App = () => {
           <Route path={IndexRoute} element={<Index />} />
           <Route path={profileRoute} element={<Profile />} />
 
-          {/* categories */}
-          <Route path={categoriesRoute} element={<CategoryDetails />} />
-          <Route path={addCategoryRoute} element={<AddCategory />} />
-          <Route path={editCategoryRoute()} element={<EditCategory />} />
-
-          {/* blog  */}
-          <Route path={blogRoute} element={<Blog />} />
-          <Route path={addBlogRoute} element={<AddBlog />} />
-          <Route path={updateBlogRoute()} element={<EditBlog />} />
-
-          {/* comments */}
-          <Route path={blogAllCommentsRoute} element={<CommentsDetail/>} />
-
-          {/* Users */}
-          <Route path={usersAllDetailRoute} element={<UsersDetail/>} />
-
           {/* blog read  */}
           <Route path={blogReadRoute()} element={<BlogRead />} />
           {/* blog by category */}
           <Route path={getBlogByCategoryRoute()} element={<BlogByCategory />} />
           {/* Search result page */}
           <Route path={searchRoute()} element={<SearchResult />} />
-
         </Route>
+
         <Route path={signInRoute} element={<Signin />} />
         <Route path={signUpRoute} element={<Signup />} />
+
+        {/* protected routes */}
+        <Route element={<AuthRouteProtection />}>
+          <Route path={blogRoute} element={<Blog />} />
+          <Route path={addBlogRoute} element={<AddBlog />} />
+          <Route path={updateBlogRoute()} element={<EditBlog />} />
+          <Route path={blogAllCommentsRoute} element={<CommentsDetail />} />
+        </Route>
+
+        {/* admin only protected routes */}
+        <Route element={<AuthRouteAdminOnly />}>
+          <Route path={categoriesRoute} element={<CategoryDetails />} />
+          <Route path={addCategoryRoute} element={<AddCategory />} />
+          <Route path={editCategoryRoute()} element={<EditCategory />} />
+          <Route path={usersAllDetailRoute} element={<UsersDetail />} />
+        </Route>
+        
       </Routes>
     </BrowserRouter>
   );

@@ -7,26 +7,28 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { addCategoryRoute, editCategoryRoute } from "./pageRoutes";
 import { showToast } from "@/features/showToast";
+import { useSelector } from "react-redux";
 
 const CommentsDetail = () => {
   const [refresh, setRefresh] = useState(false);
+  const user = useSelector((state) => state.user);
+
+  const userData = { id: user.user._id, role: user.user.role };
   let {
     data: commentData,
     loading,
     error,
   } = useFetch(
-    `${import.meta.env.VITE_API_BASE_URL}/blog/all-comments`,
+    `${import.meta.env.VITE_API_BASE_URL}/blog/get-all/user-comments`,
     {
-      method: "get",
+      method: "POST",
       credentials: "include",
+      headers:{'Content-type':'application/json'},
+      body:JSON.stringify(userData)
     },
     [refresh]
   );
-//   if (commentData) {
-//     console.log(commentData);
-//     console.log(commentData.comments);
-
-//   }
+   
   const handleDelete = async (id) => {
     try {
       const response = await fetch(
@@ -70,22 +72,19 @@ const CommentsDetail = () => {
             </tr>
           </thead>
           <tbody>
-            {commentData && commentData.comments.length != 0 ?  (
-              commentData.comments.map((comment, idx) => (
+            {commentData && commentData?.comments?.length != 0 ? (
+              commentData?.comments?.map((comment, idx) => (
                 <tr
                   key={idx}
                   className="border-b border-gray-800 hover:bg-slate-950 transition rounded-lg "
                 >
                   <td className="py-4 px-3">
                     {comment.blogId ? comment.blogId.title : "No Blog"}
-
                   </td>
                   <td className="py-4 px-3 text-red-200">
                     {comment.author.name}
                   </td>
-                  <td className="py-4 px-3 text-red-200">
-                    {comment.comment}
-                  </td>
+                  <td className="py-4 px-3 text-red-200">{comment.comment}</td>
                   <td className="py-4 px-3">
                     <div className="flex gap-3">
                       <button

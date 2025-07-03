@@ -6,7 +6,7 @@ import { useSearchParams } from "react-router-dom";
 const SearchResult = () => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get("query");
-  console.log(query);
+  // console.log(query);
   let {
     data: blogData,
     loading,
@@ -18,9 +18,9 @@ const SearchResult = () => {
       credentials: "include",
     },[query]
   );
-  if (blogData) {
-    console.log(blogData);
-  }
+  // if (blogData) {
+  //   console.log(blogData);
+  // }
   return (
     <div className="p-6  w-full relative bg-slate-950 text-slate-400">
       <div className="columns-1 sm:columns-2 lg:columns-2  gap-4 mt-4">

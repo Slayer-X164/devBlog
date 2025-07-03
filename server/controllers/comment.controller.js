@@ -50,6 +50,38 @@ export const getAllComments = async (req, res, next) => {
     next(errorHandler(500, error.message));
   }
 };
+export const getAllCommentsOfUser = async (req, res, next) => {
+  try {
+     const { id, role } = req.body;
+
+    if (!id || !role) {
+      return next(errorHandler(400, "Missing id or role"));
+    }
+    let comments
+    if(role==='admin'){
+       comments = await Comments.find()
+      .populate("author", "name ")
+      .populate("blogId", "title")
+      .sort({ createdAt: -1 })
+      .lean()
+      .exec();
+    }else{
+       comments = await Comments.find({author:id})
+      .populate("author", "name ")
+      .populate("blogId", "title")
+      .sort({ createdAt: -1 })
+      .lean()
+      .exec();
+    }
+
+    res.status(200).json({
+      success: true,
+      comments,
+    });
+  } catch (error) {
+    next(errorHandler(500, error.message));
+  }
+};
 export const deleteCommentById = async (req, res, next) => {
   try {
     const { commentId } = req.params;

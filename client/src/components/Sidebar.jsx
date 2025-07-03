@@ -7,6 +7,7 @@ import { FaRegUser } from "react-icons/fa";
 import { GoDotFill } from "react-icons/go";
 import { MdOutlineCategory } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { BiSolidNavigation } from "react-icons/bi";
 import {
   blogAllCommentsRoute,
   blogRoute,
@@ -16,7 +17,9 @@ import {
   usersAllDetailRoute,
 } from "@/pages/pageRoutes";
 import { useFetch } from "@/hooks/useFetch";
+import { useSelector } from "react-redux";
 const Sidebar = () => {
+  const user = useSelector((state) => state.user);
   let {
     data: categoryData,
     loading,
@@ -33,7 +36,6 @@ const Sidebar = () => {
       label: "Home",
       path: IndexRoute,
       icon: <FaHome />,
-      color: "oklch(70.7% 0.165 254.624) ",
     },
     { label: "Categories", path: categoriesRoute, icon: <BiCategory /> },
     { label: "Blogs", path: blogRoute, icon: <IoDocumentTextOutline /> },
@@ -44,18 +46,54 @@ const Sidebar = () => {
   return (
     <div className="h-[calc(100vh-72px)] w-96 bg-slate-950 text-white pr-6 py-8 flex gap-6 flex-col">
       <div className="bg-slate-900/50 w-full border-1 border-slate-800 rounded-lg flex flex-col gap-3 p-4">
-        {sidebarLinks.map(({ label, path, icon, color }, index) => (
-          <div key={index}>
+      <h1 className="flex items-center gap-2 text-xl text-slate-200 font-semibold">
+          <span className="text-pink-600 p-2 bg-pink-600/20 rounded-sm">
+            <BiSolidNavigation className="text-md"/>
+          </span>{" "}
+            Quick Access
+        </h1>
+        <Link
+
+          to={IndexRoute}
+          className="hover:text-slate-200 flex text-sm pl-1  items-center gap-2  text-slate-400"
+        >
+          <FaHome />
+          Home
+        </Link>
+
+        <Link
+          to={blogRoute}
+          className="hover:text-slate-200 flex  text-sm pl-1 items-center gap-2 text-slate-400"
+        >
+          <IoDocumentTextOutline  className="text-md"/>
+          Blogs
+        </Link>
+        <Link
+          to={blogAllCommentsRoute}
+          className="hover:text-slate-200 flex text-sm pl-1 items-center gap-2 text-slate-400"
+        >
+          <FaRegComment className="text-md"/>
+          Comments
+        </Link>
+        {user && user.isSignedIn && user.user.role === "admin" && (
+          <>
+            {" "}
             <Link
-              style={{ color: color }}
-              to={path}
-              className="hover:text-slate-200 flex items-center gap-1 text-slate-400"
+              to={categoriesRoute}
+              className="hover:text-slate-200 flex text-sm pl-1 items-center gap-2 text-slate-400"
             >
-              {icon}
-              {label}
+              <BiCategory className="text-md"/>
+              Categories
             </Link>
-          </div>
-        ))}
+            <Link
+              to={usersAllDetailRoute}
+              className="hover:text-slate-200 flex text-sm pl-1 items-center gap-2 text-slate-400"
+            >
+              <FaRegUser className="text-md"/>
+              Users
+            </Link>
+          </>
+        )}
       </div>
       <div className="bg-slate-900/50 w-full border-1 border-slate-800 rounded-lg flex flex-col gap-3 p-4">
         <h1 className="flex items-center gap-2 text-xl text-slate-200 font-semibold">
@@ -64,6 +102,7 @@ const Sidebar = () => {
           </span>{" "}
           Categories
         </h1>
+
         {categoryData &&
           categoryData.categories.map((category, index) => (
             <div key={index}>

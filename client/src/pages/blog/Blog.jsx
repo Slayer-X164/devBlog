@@ -7,17 +7,24 @@ import { addBlogRoute, updateBlogRoute } from "../pageRoutes";
 import { z } from "zod";
 import { useFetch } from "@/hooks/useFetch";
 import { showToast } from "@/features/showToast";
+import { useSelector } from "react-redux";
 const Blog = () => {
   const [refresh, setRefresh] = useState(false);
+  const user = useSelector((state) => state.user);
+
+  const userData = { id: user.user._id, role: user.user.role };
+
   const {
     data: allBlogData,
     loading,
     error: blogError,
   } = useFetch(
-    `${import.meta.env.VITE_API_BASE_URL}/blog/get-all`,
+    `${import.meta.env.VITE_API_BASE_URL}/blog/get-all/user-blogs`,
     {
-      method: "GET",
+      method: "POST",
       credentials: "include",
+      headers:{'Content-type':'application/json'},
+      body:JSON.stringify(userData)
     },
     [refresh]
   );
@@ -41,7 +48,7 @@ const Blog = () => {
   };
   return (
     <div className="text-slate-200 relative w-full h-[calc(100vh-72px)] bg-slate-950  flex justify-center p-4">
-      <div className=" text-slate-300  rounded-lg shadow-xl w-full mx-10 my-4 overflow-scroll">
+      <div className=" text-slate-300  rounded-lg shadow-xl w-full mx-10 my-4 overflow-scroll overflow-x-scroll">
         {/* {loading && <Loading />} */}
         <div className="w-full flex justify-center mb-4 ">
           <Link

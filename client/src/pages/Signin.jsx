@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
+import { IndexRoute } from "./pageRoutes";
 const Signin = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ const Signin = () => {
         }
       );
       const data = await response.json();
-      
+
 
       if (!response.ok) {
         console.log("error");
@@ -60,11 +61,11 @@ const Signin = () => {
     }
   };
   return (
-    <div className="text-neutral-200 h-screen w-full flex items-center justify-center p-3">
-      <div className="drop-shadow-2xl drop-shadow-blue-600/12 w-96 h-auto py-6 px-4 rounded-lg bg-slate-900 flex flex-col ">
+    <div className="text-neutral-200 h-screen w-full flex items-center justify-center p-3 flex-col">
+      <div className="w-96 h-auto py-6 px-4 rounded-lg bg-slate-900 flex flex-col ">
         <div>
           <h1 className="text-2xl text-center mb-6 text-slate-500 font-semibold">
-            Login Into Account
+            Sign in to continue
           </h1>
         </div>
         <GoogleAuth />
@@ -118,6 +119,7 @@ const Signin = () => {
           </Link>
         </p>
       </div>
+      <Link to={IndexRoute} className="text-slate-500/80  underline pt-4">back to home </Link>
     </div>
   );
 };
