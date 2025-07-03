@@ -16,7 +16,7 @@ const blogRoute = express.Router();
 blogRoute.post("/blog/add", authenticate, addBlog);
 blogRoute.get("/blog/get/:blogId",  getBlog);
 blogRoute.put("/blog/update/:blogId", authenticate, updateBlog);
-blogRoute.delete("/blog/delete/:blogId", authenticate, deleteBlog);
+blogRoute.delete("/blog/delete/:blogId",  deleteBlog);
 
 blogRoute.post("/blog/get-all/user-blogs", getAllBlogOfUser);
 blogRoute.get("/blog/get-all", getAllBlog);
