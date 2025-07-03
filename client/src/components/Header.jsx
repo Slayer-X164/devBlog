@@ -68,8 +68,8 @@ const Header = () => {
         </div>
       </div>
       {!user.isSignedIn ? (
-        <div>
-          <Link to="/sign-in" className="cursor-pointer flex justify-center items-center gap-2 bg-gradient-to-br from-amber-200 via-amber-800 to-orange-950 rounded-lg py-2 px-4 text-md">
+        <div className="bg-gradient-to-br p-0.5 from-yellow-200 via-yellow-700 to-red-950  rounded-lg shadow-lg shadow-yellow-500/15">
+          <Link to="/sign-in" className="cursor-pointer flex justify-center items-center gap-2 bg-slate-950 text-yellow-50  rounded-lg py-2 px-4 text-md">
             <PiSignIn />
             Sign in
           </Link>
