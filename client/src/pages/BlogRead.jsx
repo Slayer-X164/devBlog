@@ -15,6 +15,7 @@ import { FaRegHeart } from "react-icons/fa";
 import EachComment from "@/components/EachComment";
 import confetti from "canvas-confetti";
 import Like from "@/components/Like";
+import GithubBtn from "@/components/GithubBtn";
 const BlogRead = () => {
 
   const { slug } = useParams();
@@ -35,23 +36,15 @@ const BlogRead = () => {
   }
 
   return (
-    <div className="w-full p-8  flex justify-between  gap-6">
-      <div className="w-[25%]  ">
-        <div className="bg-slate-900/50 w-full border-1 border-slate-800 rounded-lg flex flex-col justify-center items-center gap-3 p-4">
-          <Link
-            to="https://github.com/Slayer-X164/devBlog"
-            target="_blank"
-            className="text-yellow-200   text-md font-mono bg-yellow-400/10 rounded-lg  py-2 px-4 flex items-center justify-center gap-2"
-          >
-            give a star <FaGithub />
-          </Link>
-        </div>
+    <div className="w-full md:p-8 p-5 flex-col items-center md:flex  justify-between  gap-6">
+      <div className="w-[25%]  md:block hidden">
+       <GithubBtn/>
       </div>
-      <div className="w-[75%]  ">
+      <div className="md:w-[75%]  ">
         {loading ? (
           <Loading />
         ) : (
-          <div className="max-w-3xl mx-auto p-8 bg-white dark:bg-slate-900 text-black dark:text-white rounded-lg shadow-md">
+          <div className="w-full md:max-w-3xl mx-auto p-4 md:p-8 bg-white dark:bg-slate-900 text-black dark:text-white rounded-lg shadow-md">
             {/* Profile Section */}
             <div className="flex items-center justify-between gap-3 mb-4">
               <div className="flex items-center gap-3 mb-4">

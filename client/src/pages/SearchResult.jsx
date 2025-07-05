@@ -22,7 +22,8 @@ const SearchResult = () => {
   //   console.log(blogData);
   // }
   return (
-    <div className="p-6  w-full relative bg-slate-950 text-slate-400">
+    <div className="p-6 min-h-[calc(100vh-72px)] w-full relative bg-slate-950 text-slate-400">
+      <h1 className="text-2xl md:text-4xl pb-3 font-bold text-slate-300">Search Result for : <span className="font-light">{query}</span></h1>
       <div className="columns-1 sm:columns-2 lg:columns-2  gap-4 mt-4">
         {loading && <Loading />}
         {blogData &&

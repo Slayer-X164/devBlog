@@ -95,13 +95,13 @@ const Profile = () => {
   };
 
   return (
-    <div className="relative w-full h-[calc(100vh-72px)] bg-slate-950 text-neutral-300 flex justify-center p-4">
+    <div className="relative w-full h-[calc(100vh-72px)] bg-slate-950 text-neutral-300 md:flex justify-center p-5 md:p-4">
       <div>
         {loading || saveLoad && <Loading />}
 
         <form
           onSubmit={handleSave}
-          className="relative w-xl rounded-xl border-1 mt-4 p-6 flex  flex-col h-auto items-center   border-slate-700 gap-3"
+          className="relative w-full md:w-xl rounded-xl border-1 mt-4 p-6 flex  flex-col h-auto items-center   border-slate-700 gap-3"
         >
           <Dropzone
             onDrop={(acceptedFiles) => handleDropZoneFiles(acceptedFiles)}

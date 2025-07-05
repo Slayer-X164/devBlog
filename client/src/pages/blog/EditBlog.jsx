@@ -130,10 +130,10 @@ const EditBlog = () => {
     setBlogContent(data);
   };
   return (
-    <div className="w-full  flex justify-start  gap-6 items-center p-4 flex-col">
+    <div className="w-full  md:flex justify-start  gap-6 items-center p-4 flex-col">
       <form
         onSubmit={handleSubmit}
-        className="relative w-2xl rounded-xl  border-dashed mt-4 p-6 flex  flex-col h-auto items-center   border-pink-700/50 gap-3 bg-neutral-50"
+        className="relative md:w-2xl rounded-xl  border-dashed mt-4 p-4 md:p-6 flex  flex-col h-auto items-center   border-pink-700/50 gap-3 bg-neutral-50"
       >
         {loading && <Loading />}
         <div>
@@ -206,7 +206,7 @@ const EditBlog = () => {
       <div>
         <Link
           to={blogRoute}
-          className="flex items-center gap-0.5 text-sm text-slate-400 font-light border-b "
+          className="md:flex hidden  items-center gap-0.5 text-sm text-slate-400 font-light border-b "
         >
           <IoMdArrowBack />
           Go Back

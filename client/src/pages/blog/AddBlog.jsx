@@ -50,7 +50,7 @@ const AddBlog = () => {
     const newResult = {
       ...result,
       author: user.user._id,
-      
+
     };
 
     try {
@@ -126,10 +126,10 @@ const AddBlog = () => {
     setBlogContent(data);
   };
   return (
-    <div className="w-full  flex justify-start  gap-6 items-center p-4 flex-col">
+    <div className="w-full  md:flex justify-start  gap-6 items-center p-5 md:p-4 flex-col">
       <form
         onSubmit={handleSubmit}
-        className="relative w-2xl rounded-xl  border-dashed mt-4 p-6 flex  flex-col h-auto items-center   border-pink-700/50 gap-3 bg-neutral-50"
+        className="relative md:w-2xl rounded-xl  border-dashed mt-4 p-6 flex  flex-col h-auto items-center   border-pink-700/50 gap-3 bg-neutral-50"
       >
         {loading && <Loading />}
         <div>
@@ -194,17 +194,19 @@ const AddBlog = () => {
           </button>
         </div>
       </form>
-      <div>
+          <div>
         <Link
           to={blogRoute}
-          className="flex items-center gap-0.5 text-sm text-slate-400 font-light border-b "
+          className=" items-center hidden md:flex gap-0.5 text-sm text-slate-400 font-light border-b "
         >
           <IoMdArrowBack />
           Go Back
         </Link>
       </div>
     </div>
+
   );
+
 };
 
 export default AddBlog;

@@ -44,7 +44,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className="h-[calc(100vh-72px)] w-96 bg-slate-950 text-white pr-6 py-8 flex gap-6 flex-col">
+    <div className="hidden md:flex h-[calc(100vh-72px)] w-96 bg-slate-950 text-white pr-6 py-8  gap-6 flex-col">
       <div className="bg-slate-900/50 w-full border-1 border-slate-800 rounded-lg flex flex-col gap-3 p-4">
       <h1 className="flex items-center gap-2 text-xl text-slate-200 font-semibold">
           <span className="text-pink-600 p-2 bg-pink-600/20 rounded-sm">
@@ -105,7 +105,7 @@ const Sidebar = () => {
 
         {categoryData &&
           categoryData.categories.map((category, index) => (
-            <div key={index}>
+            <div key={index} >
               <Link
                 to={getBlogByCategoryRoute(category.slug)}
                 className="hover:text-slate-200  flex  items-center gap-1 text-slate-400"

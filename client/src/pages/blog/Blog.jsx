@@ -48,7 +48,7 @@ const Blog = () => {
   };
   return (
     <div className="text-slate-200 relative w-full h-[calc(100vh-72px)] bg-slate-950  flex justify-center p-4">
-      <div className=" text-slate-300  rounded-lg shadow-xl w-full mx-10 my-4 overflow-scroll overflow-x-scroll">
+      <div className=" text-slate-300  rounded-lg shadow-xl w-full  md:mx-10 my-4 overflow-scroll overflow-x-scroll">
         {/* {loading && <Loading />} */}
         <div className="w-full flex justify-center mb-4 ">
           <Link

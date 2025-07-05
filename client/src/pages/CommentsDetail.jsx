@@ -28,7 +28,7 @@ const CommentsDetail = () => {
     },
     [refresh]
   );
-   
+
   const handleDelete = async (id) => {
     try {
       const response = await fetch(
@@ -50,8 +50,8 @@ const CommentsDetail = () => {
     }
   };
   return (
-    <div className="text-slate-200 relative w-full h-[calc(100vh-72px)] bg-slate-950  flex justify-center p-4">
-      <div className=" text-slate-300  rounded-lg shadow-xl w-full mx-10 my-4 overflow-scroll">
+    <div className="text-slate-200 relative w-full h-[calc(100vh-72px)] bg-slate-950  md:flex justify-center p-4">
+      <div className=" text-slate-300  rounded-lg shadow-xl w-full md:mx-10 my-4 overflow-scroll">
         {loading && <Loading />}
         <div className="w-full flex justify-center mb-4 "></div>
         <table className="w-full table-auto text-left bg- border-1 border-slate-800 ">
