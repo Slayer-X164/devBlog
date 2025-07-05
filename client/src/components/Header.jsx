@@ -55,7 +55,7 @@ const Header = () => {
         <img src={logo} alt="logo" className="w-10" />
         <h1 className="text-2xl font-semibold font-mono">DevBlog</h1>
       </Link>
-      <div className="flex items-center gap-6">
+      <div className="md:flex hidden items-center gap-6">
         {/* search */}
         <Search/>
         <div>
