@@ -38,12 +38,11 @@ const Index = () => {
         </div>
       ) : (
         <div className="columns-1 sm:columns-2 lg:columns-2  gap-4 mt-4">
-          {data &&
-            data.allBlogs.map((eachBlog) => (
+          {data?.allBlogs?.length > 0 ? data.allBlogs.map((eachBlog) => (
               <div key={eachBlog._id} className="mb-4 break-inside-avoid">
                 <BlogCard props={eachBlog} />
               </div>
-            ))}
+            )):<p className="text-slate-500 text-sm">No blogs found.</p>}
         </div>
       )}
     </div>
