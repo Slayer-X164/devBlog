@@ -56,12 +56,12 @@ const MobileNav = () => {
 
   return (
     <div
-      className={`absolute top-0  w-full bg-slate-950/70 ${
+      className={`absolute top-0 overflow-scroll  w-full bg-slate-950/70 ${
         isOpen ? "translate-x-0" : "-translate-x-full"
       } flex justify-end`}
     >
       <div
-        className={`overflow-scroll p-6 h-[calc(100vh-72px)] w-80 backdrop-blur-sm bg-slate-800/20 text-white pr-6 py-8 flex gap-6 flex-col `}
+        className={` p-6 min-h-screen w-80 backdrop-blur-sm bg-slate-800/20 text-white pr-6 py-8 flex gap-6 flex-col `}
       >
         <Search/>
         <div className="bg-slate-900 w-full border-1 border-slate-800 rounded-lg flex flex-col gap-3 p-4">

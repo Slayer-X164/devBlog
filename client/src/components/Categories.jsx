@@ -73,7 +73,7 @@ const Categories = () => {
           </tr>
         </thead>
         <tbody>
-          {categoryData && categoryData.categories.length > 0 ? (
+          {categoryData?.categories?.length > 0 ? (
             categoryData.categories.map((category, idx) => (
               <tr
                 key={idx}

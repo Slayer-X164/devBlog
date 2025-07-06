@@ -14,17 +14,18 @@ const EachComment = ({ props }) => {
     {
       method: "get",
       credentials: "include",
-    },[props.refresh]
+    },
+    [props.refresh]
   );
   // if (commentData) {
   //   console.log("props:", props.blogId, "and", commentData.comments);
   // }
-if(loading){
-  return <Loading/>
-}
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <>
-      {commentData &&
+      {commentData?.comments?.length > 0 ? (
         commentData.comments.map((e, index) => (
           <div
             key={index}
@@ -48,12 +49,13 @@ if(loading){
               <p className="mt-1 text-slate-200 text-sm">{e.comment}</p>
 
               {/* Reactions */}
-              <div className="flex items-center gap-2 mt-3 text-slate-400 text-sm">
-               
-              </div>
+              <div className="flex items-center gap-2 mt-3 text-slate-400 text-sm"></div>
             </div>
           </div>
-        ))}
+        ))
+      ) : (
+        <p className="text-slate-500 text-sm">No categories found.</p>
+      )}
     </>
   );
 };
