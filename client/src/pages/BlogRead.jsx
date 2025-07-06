@@ -36,7 +36,7 @@ const BlogRead = () => {
   }
 
   return (
-    <div className="w-full md:p-8 p-5 flex-col items-center md:flex  justify-between  gap-6">
+    <div className="w-full md:p-8 p-5 flex-col md:flex-row items-start md:flex  justify-between  gap-6">
       <div className="w-[25%]  md:block hidden">
        <GithubBtn/>
       </div>

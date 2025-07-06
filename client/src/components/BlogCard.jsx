@@ -109,9 +109,9 @@ const BlogCard = ({ props }) => {
 
       <div className="flex items-center justify-between mt-6 border-t border-slate-800 pt-3 text-slate-400 text-sm">
         <div className="flex items-center gap-4">
-          <span className="flex items-center gap-1">
+         {loading? <div className="h-full mb-4 bg-slate-700 animate-pulse  rounded-xl p-4 shadow-lg border border-slate-800  transition-all duration-100   w-full max-w-md sm:max-w-lg lg:max-w-xl xl:max-w-2xl mx-auto"></div>: <span className="flex items-center gap-1">
             <FaRegHeart /> {likeData&&likeData.totalLikeCount}
-          </span>
+          </span>}
           <span className="flex items-center gap-1">
             <CommentCount blogId={props._id} />
           </span>

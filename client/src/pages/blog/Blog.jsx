@@ -8,6 +8,7 @@ import { z } from "zod";
 import { useFetch } from "@/hooks/useFetch";
 import { showToast } from "@/features/showToast";
 import { useSelector } from "react-redux";
+import Loading from "@/components/Loading";
 const Blog = () => {
   const [refresh, setRefresh] = useState(false);
   const user = useSelector((state) => state.user);
@@ -59,7 +60,7 @@ const Blog = () => {
             Add Blog
           </Link>
         </div>
-        <table className="w-full table-auto text-left bg- border-1 border-slate-800 ">
+       {loading?<Loading/>: <table className="w-full table-auto text-left bg- border-1 border-slate-800 ">
           <thead className="bg-slate-900 ">
             <tr className="">
               <th className="py-4 px-3 text-sm tracking-wider text-slate-400">
@@ -120,7 +121,7 @@ const Blog = () => {
               </tr>
             )}
           </tbody>
-        </table>
+        </table>}
       </div>
     </div>
   );
