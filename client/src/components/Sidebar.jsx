@@ -102,21 +102,28 @@ const Sidebar = () => {
           Categories
         </h1>
 
-        {categoryData?.categories?.length > 0 ? (
-          categoryData.categories.map((category, index) => (
-            <div key={index}>
-              <Link
-                to={getBlogByCategoryRoute(category.slug)}
-                className="hover:text-slate-200 flex items-center gap-1 text-slate-400"
-              >
-                <GoDotFill />
-                {category.name}
-              </Link>
-            </div>
-          ))
-        ) : (
-          <p className="text-slate-500 text-sm">No categories found.</p>
+        {loading && (
+          <p className="text-slate-500 text-sm">Loading categories...</p>
         )}
+        {error && (
+          <p className="text-red-500 text-sm">Failed to load categories.</p>
+        )}
+        {categoryData?.categories?.length > 0
+          ? categoryData.categories.map((category, index) => (
+              <div key={index}>
+                <Link
+                  to={getBlogByCategoryRoute(category.slug)}
+                  className="hover:text-slate-200 flex items-center gap-1 text-slate-400"
+                >
+                  <GoDotFill />
+                  {category.name}
+                </Link>
+              </div>
+            ))
+          : !loading &&
+            !error && (
+              <p className="text-slate-500 text-sm">No categories found.</p>
+            )}
       </div>
     </div>
   );
