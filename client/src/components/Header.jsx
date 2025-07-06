@@ -60,8 +60,8 @@ const Header = () => {
   return (
     <header className=" w-full h-18 bg-slate-950 border-slate-900 border-b text-white flex items-center md:px-6 px-3 shadow justify-between">
       <Link to={IndexRoute} className="flex justify-center items-center gap-1">
-        <img src={logo} alt="logo" className="w-8" />
-        <h1 className="text-lg font-semibold font-mono">DevBlog</h1>
+        <img src={logo} alt="logo" className="w-8 md:w-10" />
+        <h1 className="text-lg md:text-2xl font-semibold font-mono">DevBlog</h1>
       </Link>
       <div className="flex  items-center gap-6">
         {/* search */}
