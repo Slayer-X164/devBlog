@@ -44,7 +44,7 @@ const BlogRead = () => {
         {loading ? (
           <Loading />
         ) : (
-          <div className="w-full md:max-w-3xl mx-auto p-4 md:p-8  bg-slate-900  dark:text-white rounded-lg shadow-md">
+          <div className="w-full md:max-w-3xl mx-auto p-4 md:p-8  bg-slate-900  text-white rounded-lg shadow-md">
             {/* Profile Section */}
             <div className="flex items-center justify-between gap-3 mb-4">
               <div className="flex items-center gap-3 mb-4">
@@ -59,7 +59,7 @@ const BlogRead = () => {
                   <h2 className="font-bold  text-lg">
                     {blogData && blogData.blog.author.name}
                   </h2>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                  <p className="text-sm text-gray-500 ">
                     {blogData && formatedDate}
                   </p>
                 </div>
@@ -73,7 +73,7 @@ const BlogRead = () => {
             </h1>
 
             {/* Tags */}
-            <div className="flex gap-3 flex-wrap text-sm text-gray-600 dark:text-gray-400 mb-6">
+            <div className="flex gap-3 flex-wrap text-sm  text-slate-400 mb-6">
               <span className="text-blue-300 text-lg bg-blue-600/20 mt-4 py-1 px-4 rounded-lg">
                 {blogData && blogData.blog.category.name}
               </span>
@@ -100,7 +100,7 @@ const BlogRead = () => {
             </div> */}
 
             {/* Divider */}
-            <hr className="my-10 border-gray-300 dark:border-gray-700" />
+            <hr className="my-10 border-gray-300 " />
 
             {user.isSignedIn ? (
               blogData && <Comments props={blogData} />
