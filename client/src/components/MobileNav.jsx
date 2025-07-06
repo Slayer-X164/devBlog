@@ -21,6 +21,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleNav } from "@/redux/mobileNav.slice";
 import GithubBtn from "./GithubBtn";
 import Search from "./Search";
+import { CgClose } from "react-icons/cg";
 const MobileNav = () => {
   const isOpen = useSelector((state) => state.mobileNav.isOpen);
   const dispatch = useDispatch()
@@ -68,6 +69,7 @@ const MobileNav = () => {
           <h1 className="flex items-center gap-2 text-xl text-slate-200 font-semibold">
             <span className="text-pink-600 p-2 bg-pink-600/20 rounded-sm">
               <BiSolidNavigation className="text-md" />
+             
             </span>{" "}
             Quick Access
           </h1>

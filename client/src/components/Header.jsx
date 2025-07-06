@@ -17,6 +17,7 @@ import Search from "./Search";
 import { CiMenuFries } from "react-icons/ci";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { toggleNav } from "@/redux/mobileNav.slice";
+import { CgClose } from "react-icons/cg";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -78,7 +79,6 @@ const Header = () => {
         </div>
       </div>
 
-
       {!user.isSignedIn ? (
         <div className="flex  items-center gap-3 text-sm ">
           {user.isSignedIn && (
@@ -102,31 +102,36 @@ const Header = () => {
           </div>
 
           <div className="cursor-pointer md:hidden" onClick={handleMobileNav}>
-            <HiOutlineMenuAlt3 className="font-bold text-4xl text-slate-300" />
+            {!isOpen ? (
+              <HiOutlineMenuAlt3 className="font-bold text-4xl text-slate-300" />
+            ) : (
+              <CgClose className="font-bold text-4xl text-slate-300"/>
+            )}
           </div>
         </div>
       ) : (
-        <div
-
-          className=" relative cursor-pointer p-[1px]  flex items-center gap-3"
-        >
-           <div className="flex md:hidden">
-          <Link to={user.isSignedIn ? addBlogRoute : signInRoute}>
-            <button className="cursor-pointer flex justify-center items-center gap-2 bg-gradient-to-br from-blue-300 via-blue-600 to-blue-950 rounded-lg py-2.5 sm:py-2 px-2.5 sm:px-4 text-sm">
-              <FaPencilAlt />
-              <p className="sm:block  hidden">Write Post</p>
-            </button>
-          </Link>
-        </div>
-          <div  onClick={handleDropDown} className=" bg-gradient-to-br p-[1px] from-indigo-200 via-indigo-500 to-indigo-950  rounded-md">
-
+        <div className=" relative cursor-pointer p-[1px]  flex items-center gap-3">
+          <div className="flex md:hidden">
+            <Link to={user.isSignedIn ? addBlogRoute : signInRoute}>
+              <button className="cursor-pointer flex justify-center items-center gap-2 bg-gradient-to-br from-blue-300 via-blue-600 to-blue-950 rounded-lg py-2.5 sm:py-2 px-2.5 sm:px-4 text-sm">
+                <FaPencilAlt />
+                <p className="sm:block  hidden">Write Post</p>
+              </button>
+            </Link>
+          </div>
+          <div
+            onClick={handleDropDown}
+            className=" bg-gradient-to-br p-[1px] from-indigo-200 via-indigo-500 to-indigo-950  rounded-md"
+          >
             <div className="md:p-2 p-1.5  rounded-md flex items-center gap-2 bg-slate-950">
               <img
                 src={user.user.photoURL || "user.png"}
                 alt=""
                 className="w-6 rounded-full"
               />
-              <h3 className="text-sm truncate max-w-10 md:max-w-22">{user.user.name}</h3>
+              <h3 className="text-sm truncate max-w-10 md:max-w-22">
+                {user.user.name}
+              </h3>
               <div>
                 {dropdownIsOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
               </div>
@@ -170,11 +175,10 @@ const Header = () => {
                 </div>
               </div>
             )}
-
           </div>
           <div className="cursor-pointer md:hidden" onClick={handleMobileNav}>
-              <HiOutlineMenuAlt3 className="font-bold text-4xl text-slate-500" />
-            </div>
+            <HiOutlineMenuAlt3 className="font-bold text-4xl text-slate-500" />
+          </div>
         </div>
       )}
     </header>
