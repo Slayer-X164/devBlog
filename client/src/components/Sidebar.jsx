@@ -46,14 +46,13 @@ const Sidebar = () => {
   return (
     <div className="hidden md:flex h-[calc(100vh-72px)] w-96 bg-slate-950 text-white pr-6 py-8  gap-6 flex-col">
       <div className="bg-slate-900/50 w-full border-1 border-slate-800 rounded-lg flex flex-col gap-3 p-4">
-      <h1 className="flex items-center gap-2 text-xl text-slate-200 font-semibold">
+        <h1 className="flex items-center gap-2 text-xl text-slate-200 font-semibold">
           <span className="text-pink-600 p-2 bg-pink-600/20 rounded-sm">
-            <BiSolidNavigation className="text-md"/>
+            <BiSolidNavigation className="text-md" />
           </span>{" "}
-            Quick Access
+          Quick Access
         </h1>
         <Link
-
           to={IndexRoute}
           className="hover:text-slate-200 flex text-sm pl-1  items-center gap-2  text-slate-400"
         >
@@ -65,14 +64,14 @@ const Sidebar = () => {
           to={blogRoute}
           className="hover:text-slate-200 flex  text-sm pl-1 items-center gap-2 text-slate-400"
         >
-          <IoDocumentTextOutline  className="text-md"/>
+          <IoDocumentTextOutline className="text-md" />
           Blogs
         </Link>
         <Link
           to={blogAllCommentsRoute}
           className="hover:text-slate-200 flex text-sm pl-1 items-center gap-2 text-slate-400"
         >
-          <FaRegComment className="text-md"/>
+          <FaRegComment className="text-md" />
           Comments
         </Link>
         {user && user.isSignedIn && user.user.role === "admin" && (
@@ -82,14 +81,14 @@ const Sidebar = () => {
               to={categoriesRoute}
               className="hover:text-slate-200 flex text-sm pl-1 items-center gap-2 text-slate-400"
             >
-              <BiCategory className="text-md"/>
+              <BiCategory className="text-md" />
               Categories
             </Link>
             <Link
               to={usersAllDetailRoute}
               className="hover:text-slate-200 flex text-sm pl-1 items-center gap-2 text-slate-400"
             >
-              <FaRegUser className="text-md"/>
+              <FaRegUser className="text-md" />
               Users
             </Link>
           </>
@@ -103,18 +102,21 @@ const Sidebar = () => {
           Categories
         </h1>
 
-        {categoryData &&
+        {categoryData?.categories?.length > 0 ? (
           categoryData.categories.map((category, index) => (
-            <div key={index} >
+            <div key={index}>
               <Link
                 to={getBlogByCategoryRoute(category.slug)}
-                className="hover:text-slate-200  flex  items-center gap-1 text-slate-400"
+                className="hover:text-slate-200 flex items-center gap-1 text-slate-400"
               >
                 <GoDotFill />
                 {category.name}
               </Link>
             </div>
-          ))}
+          ))
+        ) : (
+          <p className="text-slate-500 text-sm">No categories found.</p>
+        )}
       </div>
     </div>
   );
