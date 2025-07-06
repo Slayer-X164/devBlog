@@ -177,7 +177,11 @@ const Header = () => {
             )}
           </div>
           <div className="cursor-pointer md:hidden" onClick={handleMobileNav}>
-            <HiOutlineMenuAlt3 className="font-bold text-4xl text-slate-500" />
+            {!isOpen ? (
+              <HiOutlineMenuAlt3 className="font-bold text-4xl text-slate-300" />
+            ) : (
+              <CgClose className="font-bold text-4xl text-slate-300"/>
+            )}
           </div>
         </div>
       )}
