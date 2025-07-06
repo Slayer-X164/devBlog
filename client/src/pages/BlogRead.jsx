@@ -44,7 +44,7 @@ const BlogRead = () => {
         {loading ? (
           <Loading />
         ) : (
-          <div className="w-full md:max-w-3xl mx-auto p-4 md:p-8  bg-slate-900 text-black dark:text-white rounded-lg shadow-md">
+          <div className="w-full md:max-w-3xl mx-auto p-4 md:p-8  bg-slate-900  dark:text-white rounded-lg shadow-md">
             {/* Profile Section */}
             <div className="flex items-center justify-between gap-3 mb-4">
               <div className="flex items-center gap-3 mb-4">
@@ -56,7 +56,7 @@ const BlogRead = () => {
                   className="w-11 h-11 rounded-full border-2 border-slate-500"
                 />
                 <div>
-                  <h2 className="font-bold text-lg">
+                  <h2 className="font-bold  text-lg">
                     {blogData && blogData.blog.author.name}
                   </h2>
                   <p className="text-sm text-gray-500 dark:text-gray-400">
