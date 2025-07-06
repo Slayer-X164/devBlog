@@ -56,7 +56,7 @@ const MobileNav = () => {
 
   return (
     <div
-      className={`absolute top-0  h-[calc(100vh-72px)] w-full bg-slate-950/70 ${
+      className={`absolute top-0  w-full bg-slate-950/70 ${
         isOpen ? "translate-x-0" : "-translate-x-full"
       } flex justify-end`}
     >
