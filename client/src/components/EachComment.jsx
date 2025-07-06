@@ -53,9 +53,7 @@ const EachComment = ({ props }) => {
             </div>
           </div>
         ))
-      ) : (
-        <p className="text-slate-500 text-sm">No categories found.</p>
-      )}
+      ) : null}
     </>
   );
 };
